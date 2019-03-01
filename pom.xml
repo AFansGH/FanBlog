@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>top.afanee</groupId>
+	<artifactId>FanBlog</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+
+	<properties>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jdk.version>1.8</jdk.version>
+		
+		<!-- email,commons,httpclient...activiti... -->
+		<activiti.version>5.22.0</activiti.version>
+		<activiti.spring.version>5.22.0</activiti.spring.version>
+		<!-- 公共依赖 阿帕奇的各个工具类 -->
+		<commons-io.version>2.5</commons-io.version>
+		<commons-lang3.version>3.6</commons-lang3.version>
+		<commons-codec.version>1.6</commons-codec.version>
+		<commons-beanutils.version>1.9.3</commons-beanutils.version>
+		<commons-collections.version>3.2.2</commons-collections.version>
+		<commons-math3.version>3.6.1</commons-math3.version>
+		<commons.fileupload>1.3.2</commons.fileupload>
+		<commons-email.version>1.4</commons-email.version>
+		<commons-text.version>1.1</commons-text.version>
+		<!-- httpclient -->
+		<httpclient.version>4.5.3</httpclient.version>
+		<!-- junit -->
+		<junit.version>4.12</junit.version>
+		<!-- 时间日期操作 -->
+		<joda-time.version>2.9.9</joda-time.version>
+		<!-- 功能组件 -->
+		<poi.version>3.16</poi.version>
+		<quartz.version>2.2.3</quartz.version>
+		<fastjson.version>1.2.28</fastjson.version>
+		<!-- 基础框架 -->
+		<spring.version>4.3.8.RELEASE</spring.version>
+		<mybatis.version>3.4.4</mybatis.version>
+		<mybatis.spring.version>1.3.1</mybatis.spring.version>
+		<!-- 数据源 -->
+		<druid.version>1.1.0</druid.version>
+		<mysql.connector>5.1.37</mysql.connector>
+		<!-- 通用Mapper的版本号 -->
+		<mapper.version>4.0.0-beta3</mapper.version>
+
+		<!-- 分页 -->
+		<pagehelper.version>5.0.3</pagehelper.version>
+		<!-- jackson -->
+		<jackson.version>2.7.4</jackson.version>
+		<!-- 日志 -->
+		<log4j.version>1.2.17</log4j.version>
+		<logback.version>1.1.7</logback.version>
+		<slf4j.version>1.7.21</slf4j.version>
+		<!-- servlet-api -->
+		<servlet-api.version>2.5</servlet-api.version>
+		<!-- validate -->
+		<validation.version>1.1.0.Final</validation.version>
+		<hibernate-validator.version>5.1.1.Final</hibernate-validator.version>
+		
+	</properties>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+	<modules>
+		<module>rece-web</module>
+		<module>fanblog-common</module>
+		<module>mana-web</module>
+	</modules>
+</project>
