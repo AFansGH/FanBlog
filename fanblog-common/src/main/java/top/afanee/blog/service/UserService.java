@@ -8,4 +8,6 @@ public interface UserService {
 
 	List<User> getAll();
 
+    User findUserByUserid(Integer userid);
+
 }

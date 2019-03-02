@@ -13,9 +13,8 @@
 		http://www.springframework.org/schema/mvc 
 		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
 
-	<!-- 默认的注解映射的支持，org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping -->
-	
-		<context:component-scan base-package="top.afanee.blog.controller"
+	<!-- 禁用默认的全扫描，只扫描controller -->
+	<context:component-scan base-package="top.afanee.blog.controller"
 		use-default-filters="false">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
@@ -48,6 +47,44 @@
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+	
+	
+	<!-- freemarker的配置 -->
+	<bean id="freemarkerResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<!-- 页面后缀 -->
+        <property name="suffix" value=".html" />
+        <property name="contentType" value="text/html;charset=utf-8" />
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"/>
+        <property name="exposeRequestAttributes" value="true" />
+	    <property name="exposeSessionAttributes" value="true" />
+	    <property name="exposeSpringMacroHelpers" value="true" />
+    </bean>
+	
+	<!-- freemarker的配置 -->
+    <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPath" value="/" />
+        <property name="freemarkerSettings"><!-- 设置FreeMarker环境属性 -->
+            <props>
+                <prop key="default_encoding">UTF-8</prop><!--模板的编码格式 -->
+                <prop key="template_update_delay">1</prop><!--刷新模板的周期，单位为秒 -->
+                <prop key="locale">UTF-8</prop><!-- 本地化设置 -->
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="time_format">HH:mm:ss</prop>
+                <prop key="boolean_format">true,false</prop>
+                <prop key="whitespace_stripping">true</prop>
+                <prop key="tag_syntax">auto_detect</prop>
+                <prop key="url_escaping_charset">UTF-8</prop>
+                <!-- 配置自定义的freemarker异常处理-->
+                <prop key = "template_exception_handler">top.afanee.blog.exception.FreemarkerExceptionHandler</prop>
+            </props>
+        </property>
+        <!-- <property name="freemarkerVariables">
+        	<map>  
+            <entry key="hasperm" value-ref="permissionDirective" />  
+            <entry key="perm" value-ref="myPermissionDirective" />  
+        </map> 
+        </property> -->
+    </bean>  
 
 	<!-- 定义文件上传解析器 -->
 	<bean id="multipartResolver"

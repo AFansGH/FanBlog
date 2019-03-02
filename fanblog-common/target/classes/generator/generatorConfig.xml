@@ -41,10 +41,31 @@
 
 		<!-- <table tableName="fanblog_user_friend" domainObjectName="UserFriend"> 
 			<generatedKey column="user_id friend_user_id" sqlStatement="Mysql" identity="true" 
-			/> </table> -->
+			/> </table> 
+			
 		<table tableName="fanblog_user" domainObjectName="User">
 			<generatedKey column="user_id" sqlStatement="Mysql"
 				identity="true" />
 		</table>
+		-->
+		<table tableName="fanblog_sign_in" domainObjectName="SignIn"></table>
+		
+		<table tableName="fanblog_topic" domainObjectName="Topic">
+			<generatedKey column="topic_id" sqlStatement="Mysql"
+				identity="true" />
+		</table>
+		<table tableName="fanblog_knowledge" domainObjectName="Knowledge">
+			<generatedKey column="knowledge_id" sqlStatement="Mysql"
+				identity="true" />
+		</table>
+		<table tableName="fanblog_ask" domainObjectName="Ask">
+			<generatedKey column="ask_id" sqlStatement="Mysql"
+				identity="true" />
+		</table>
+		<table tableName="fanblog_blog" domainObjectName="Blog">
+			<generatedKey column="blog_id" sqlStatement="Mysql"
+				identity="true" />
+		</table>
+		
 	</context>
 </generatorConfiguration>
