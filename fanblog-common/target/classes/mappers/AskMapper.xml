@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.afanee.blog.mappers.AskMapper" >
+  <resultMap id="BaseResultMap" type="top.afanee.blog.entities.Ask" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ask_id" property="askId" jdbcType="INTEGER" />
+    <result column="p_category_id" property="pCategoryId" jdbcType="INTEGER" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_icon" property="userIcon" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="comment_count" property="commentCount" jdbcType="INTEGER" />
+    <result column="read_count" property="readCount" jdbcType="INTEGER" />
+    <result column="collection_count" property="collectionCount" jdbcType="INTEGER" />
+    <result column="like_count" property="likeCount" jdbcType="INTEGER" />
+    <result column="mark" property="mark" jdbcType="INTEGER" />
+    <result column="best_answer_id" property="bestAnswerId" jdbcType="INTEGER" />
+    <result column="best_answer_user_id" property="bestAnswerUserId" jdbcType="INTEGER" />
+    <result column="best_answer_user_icon" property="bestAnswerUserIcon" jdbcType="VARCHAR" />
+    <result column="best_answer_user_name" property="bestAnswerUserName" jdbcType="VARCHAR" />
+    <result column="solve_type" property="solveType" jdbcType="INTEGER" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="summary" property="summary" jdbcType="LONGVARCHAR" />
+    <result column="ask_image" property="askImage" jdbcType="LONGVARCHAR" />
+    <result column="ask_image_thum" property="askImageThum" jdbcType="LONGVARCHAR" />
+  </resultMap>
+</mapper>

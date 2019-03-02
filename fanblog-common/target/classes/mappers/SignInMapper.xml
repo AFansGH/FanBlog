@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="top.afanee.blog.mappers.SignInMapper" >
+  <resultMap id="BaseResultMap" type="top.afanee.blog.entities.SignIn" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_icon" property="userIcon" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="sign_date" property="signDate" jdbcType="DATE" />
+    <result column="sign_time" property="signTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+</mapper>
