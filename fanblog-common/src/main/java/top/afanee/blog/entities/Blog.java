@@ -1,7 +1,11 @@
 package top.afanee.blog.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.*;
+
+import top.afanee.blog.po.enums.DateTimePatternEnum;
+import top.afanee.blog.utils.DateUtil;
 
 @Table(name = "fanblog_blog")
 public class Blog {
@@ -44,6 +48,12 @@ public class Blog {
      */
     @Column(name = "create_time")
     private Date createTime;
+    
+    /**
+     * 时间字串
+     */
+    @Transient 
+    private String createTimeString;
 
     /**
      * 评论人数
@@ -213,6 +223,15 @@ public class Blog {
      */
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+    
+    public String getCreateTimeString() {
+        SimpleDateFormat sdf = new SimpleDateFormat(DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern());
+        return DateUtil.friendly_time(sdf.format(createTime));
+    }
+
+    public void setCreateTimeString(String createTimeString) {
+        this.createTimeString = createTimeString;
     }
 
     /**

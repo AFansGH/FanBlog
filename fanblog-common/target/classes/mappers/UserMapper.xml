@@ -21,5 +21,6 @@
     <result column="register_time" property="registerTime" jdbcType="TIMESTAMP" />
     <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
     <result column="activation_code" property="activationCode" jdbcType="VARCHAR" />
+    <result column="account_state" property="accountState" jdbcType="TINYINT" />
   </resultMap>
 </mapper>

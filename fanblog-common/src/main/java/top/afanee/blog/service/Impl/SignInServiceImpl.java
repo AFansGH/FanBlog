@@ -43,7 +43,7 @@ public class SignInServiceImpl implements SignInService{
         else{
             signIn.setUserId(userId);
             signIn.setSignDate(null);
-            User user = this.userService.findUserByUserid(userId);
+            User user = this.userService.findUserByUserId(userId);
             signInfo.setMark(user.getMark());
             //查询该用户总共签到了多少天
             int userSignInCount = this.signInMapper.selectCount(signIn);

@@ -15,38 +15,38 @@
 				<div class="part-title">
 					<a href="${realpath}/bbs" class="part" target="_blank">讨论区</a>
 				</div>
-					<!-- <#list topics.list as topic>
+					<#list topics.list as topic>
 					<div class="data-item">
 						<a href="${realpath}/bbs/${topic.topicId?c}" target="_blank" class="tit <#if topic.boolNew==1>new</#if>">
-topic.title}</a>
+${topic.title}</a>
 						<span class="time">${topic.createTimeString} By ${topic.userName}</span>
 						<div class="read">${topic.commentCount}评/${topic.readCount}阅</div>
 					</div>
 					<#if (topic_index>=10)>
 						<#break>
 					</#if>
-					</#list> -->
+					</#list>
 			</div>
 			<div class="data-list">
 				<div class="part-title">
 					<a href="${realpath}/knowledge" class="part" target="_blank">知识库</a>
 				</div>
-					<!-- <#list knowledges.list as topic>
+					<#list knowledges.list as topic>
 					<div class="data-item">
-						<a href="${realpath}/knowledge/${topic.topicId?c}" target="_blank" class="tit ">${topic.title}</a>
+						<a href="${realpath}/knowledge/${topic.knowledgeId?c}" target="_blank" class="tit "> ${topic.title}</a>
 						<span class="time">${topic.createTimeString} By ${topic.userName}</span>
 						<div class="read">${topic.commentCount}评/${topic.readCount}阅</div>
 					</div>
-					<#if (topic_index>=10)>
+					<#if (topic_index>=9)>
 						<#break>
 					</#if>
-					</#list> -->
+					</#list>
 			</div>
 			<div class="data-list">
 				<div class="part-title">
 					<a href="${realpath}/ask" class="part" target="_blank">问答</a>
 				</div>
-					<!-- <#list asks.list as topic>
+					<#list asks.list as topic>
 					<div class="data-item">
 						<a href="${realpath}/ask/${topic.askId?c}" target="_blank" class="tit ">${topic.title}</a>
 						<span class="time">${topic.createTimeString} By ${topic.userName}</span>
@@ -55,7 +55,7 @@ topic.title}</a>
 					<#if (topic_index>=10)>
 						<#break>
 					</#if>
-					</#list> -->
+					</#list>
 			</div>
 		</div>
 		

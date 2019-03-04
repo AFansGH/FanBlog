@@ -46,10 +46,8 @@ public class Constants {
     
     public static final String SOLRSERVERURL = "http://localhost:8080/solr";
     
-//  public static final String ABSOLUTEPATH = "F:/development/FzqBlog/blog-web/src/main/webapp";// /home/default/apache-tomcat-7.0.34/webapps/blog-web"
-//  public static final String DOMAIN = "http://localhost"; 
+    public static final String MD5_SALT = "709394";
     
-
     
     public static final String ABSOLUTEPATH = "/home/default/apache-tomcat-7.0.34/webapps/blog-web";
     public static final String DOMAIN = "http://www.afanee.top";

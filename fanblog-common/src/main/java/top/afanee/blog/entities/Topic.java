@@ -1,10 +1,18 @@
 package top.afanee.blog.entities;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import top.afanee.blog.po.enums.DateTimePatternEnum;
+import top.afanee.blog.utils.DateUtil;
+
+
 @Table(name = "fanblog_topic")
 public class Topic {
+
     @Id
     @Column(name = "topic_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -54,9 +62,17 @@ public class Topic {
     /**
      * 发表时间
      */
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="GMT+8")
     @Column(name = "create_time")
     private Date createTime;
-
+    
+    /**
+     * 时间字串
+     */
+    @Transient 
+    private String createTimeString;
+    
+    
     /**
      * 最后评论时间
      */
@@ -115,7 +131,34 @@ public class Topic {
      */
     @Column(name = "topic_image_thum")
     private String topicImageThum;
+    
+    /**
+     * 是否为新
+     */
+    @Transient 
+    private Integer boolNew;
+    
+    public Integer getBoolNew() {
+        if (DateUtil.daysBetween(createTime, new Date()) > 2) {
+            return 0;
+        }
+        return 1;
+    }
 
+    public void setBoolNew(Integer boolNew) {
+        this.boolNew = boolNew;
+    }
+    
+    
+    public String getCreateTimeString() {
+        SimpleDateFormat sdf = new SimpleDateFormat(DateTimePatternEnum.YYYY_MM_DD_HH_MM_SS.getPattern());
+        return DateUtil.friendly_time(sdf.format(createTime));
+    }
+
+    public void setCreateTimeString(String createTimeString) {
+        this.createTimeString = createTimeString;
+    }
+    
     /**
      * @return topic_id
      */
@@ -142,7 +185,8 @@ public class Topic {
     /**
      * 设置0是普通贴 1是投票贴
      *
-     * @param topicType 0是普通贴 1是投票贴
+     * @param topicType
+     *            0是普通贴 1是投票贴
      */
     public void setTopicType(Integer topicType) {
         this.topicType = topicType;
@@ -160,7 +204,8 @@ public class Topic {
     /**
      * 设置组ID
      *
-     * @param pCategoryId 组ID
+     * @param pCategoryId
+     *            组ID
      */
     public void setpCategoryId(Integer pCategoryId) {
         this.pCategoryId = pCategoryId;
@@ -178,7 +223,8 @@ public class Topic {
     /**
      * 设置类型ID
      *
-     * @param categoryId 类型ID
+     * @param categoryId
+     *            类型ID
      */
     public void setCategoryId(Integer categoryId) {
         this.categoryId = categoryId;
@@ -196,7 +242,8 @@ public class Topic {
     /**
      * 设置标题
      *
-     * @param title 标题
+     * @param title
+     *            标题
      */
     public void setTitle(String title) {
         this.title = title;
@@ -214,7 +261,8 @@ public class Topic {
     /**
      * 设置作者ID
      *
-     * @param userId 作者ID
+     * @param userId
+     *            作者ID
      */
     public void setUserId(Integer userId) {
         this.userId = userId;
@@ -232,7 +280,8 @@ public class Topic {
     /**
      * 设置作者头像
      *
-     * @param userIcon 作者头像
+     * @param userIcon
+     *            作者头像
      */
     public void setUserIcon(String userIcon) {
         this.userIcon = userIcon;
@@ -250,7 +299,8 @@ public class Topic {
     /**
      * 设置作者名字
      *
-     * @param userName 作者名字
+     * @param userName
+     *            作者名字
      */
     public void setUserName(String userName) {
         this.userName = userName;
@@ -268,7 +318,8 @@ public class Topic {
     /**
      * 设置发表时间
      *
-     * @param createTime 发表时间
+     * @param createTime
+     *            发表时间
      */
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
@@ -286,7 +337,8 @@ public class Topic {
     /**
      * 设置最后评论时间
      *
-     * @param lastCommentTime 最后评论时间
+     * @param lastCommentTime
+     *            最后评论时间
      */
     public void setLastCommentTime(Date lastCommentTime) {
         this.lastCommentTime = lastCommentTime;
@@ -304,7 +356,8 @@ public class Topic {
     /**
      * 设置评论人数
      *
-     * @param commentCount 评论人数
+     * @param commentCount
+     *            评论人数
      */
     public void setCommentCount(Integer commentCount) {
         this.commentCount = commentCount;
@@ -322,7 +375,8 @@ public class Topic {
     /**
      * 设置阅读人数
      *
-     * @param readCount 阅读人数
+     * @param readCount
+     *            阅读人数
      */
     public void setReadCount(Integer readCount) {
         this.readCount = readCount;
@@ -340,7 +394,8 @@ public class Topic {
     /**
      * 设置收藏人数
      *
-     * @param collectionCount 收藏人数
+     * @param collectionCount
+     *            收藏人数
      */
     public void setCollectionCount(Integer collectionCount) {
         this.collectionCount = collectionCount;
@@ -358,7 +413,8 @@ public class Topic {
     /**
      * 设置喜欢人数
      *
-     * @param likeCount 喜欢人数
+     * @param likeCount
+     *            喜欢人数
      */
     public void setLikeCount(Integer likeCount) {
         this.likeCount = likeCount;
@@ -376,7 +432,8 @@ public class Topic {
     /**
      * 设置0是普通帖 1是置顶帖
      *
-     * @param grade 0是普通帖 1是置顶帖
+     * @param grade
+     *            0是普通帖 1是置顶帖
      */
     public void setGrade(Integer grade) {
         this.grade = grade;
@@ -394,7 +451,8 @@ public class Topic {
     /**
      * 设置0是非精华 1是精华
      *
-     * @param essence 0是非精华 1是精华
+     * @param essence
+     *            0是非精华 1是精华
      */
     public void setEssence(Integer essence) {
         this.essence = essence;
@@ -412,7 +470,8 @@ public class Topic {
     /**
      * 设置内容
      *
-     * @param content 内容
+     * @param content
+     *            内容
      */
     public void setContent(String content) {
         this.content = content;
@@ -430,7 +489,8 @@ public class Topic {
     /**
      * 设置内容摘要
      *
-     * @param summary 内容摘要
+     * @param summary
+     *            内容摘要
      */
     public void setSummary(String summary) {
         this.summary = summary;
@@ -462,7 +522,8 @@ public class Topic {
     /**
      * 设置文章缩列图
      *
-     * @param topicImageThum 文章缩列图
+     * @param topicImageThum
+     *            文章缩列图
      */
     public void setTopicImageThum(String topicImageThum) {
         this.topicImageThum = topicImageThum;

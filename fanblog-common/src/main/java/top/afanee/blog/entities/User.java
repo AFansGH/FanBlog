@@ -14,7 +14,7 @@ public class User {
 
     @Column(name = "user_name")
     private String userName;
-
+    
     private String password;
 
     @Column(name = "user_icon")
@@ -45,6 +45,19 @@ public class User {
 
     @Column(name = "activation_code")
     private String activationCode;
+    
+    @Column(name = "account_state")
+    private Boolean accountState;
+
+    
+    public Boolean getAccountState() {
+        return accountState;
+    }
+
+    
+    public void setAccountState(Boolean accountState) {
+        this.accountState = accountState;
+    }
 
     /**
      * @return user_id
