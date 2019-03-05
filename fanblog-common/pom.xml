@@ -106,8 +106,8 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>${mybatis.spring.version}</version>
 		</dependency>
-		
-		
+
+
 		<!-- 权限框架shiro -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
@@ -176,14 +176,14 @@
 			<artifactId>commons-fileupload</artifactId>
 			<version>${commons.fileupload}</version>
 		</dependency>
-		
+
 		<!-- 分页 -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper</artifactId>
 			<version>${pagehelper.version}</version>
 		</dependency>
-		
+
 		<!-- json -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -336,6 +336,18 @@
 			<version>1.2.31</version>
 		</dependency>
 
+		<!-- validate -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${validation.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate-validator.version}</version>
+		</dependency>
+
 	</dependencies>
 
 
@@ -351,7 +363,7 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
-			
+
 			<!-- 通用mapper使用mvn生成配置 -->
 			<plugin>
 				<groupId>org.mybatis.generator</groupId>

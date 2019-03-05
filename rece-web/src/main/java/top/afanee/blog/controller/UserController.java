@@ -4,6 +4,7 @@ package top.afanee.blog.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -16,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +30,7 @@ import top.afanee.blog.entities.Blog;
 import top.afanee.blog.entities.Knowledge;
 import top.afanee.blog.entities.Topic;
 import top.afanee.blog.entities.User;
+import top.afanee.blog.exception.BussinessException;
 import top.afanee.blog.po.enums.PageSize;
 import top.afanee.blog.po.enums.ResponseCode;
 import top.afanee.blog.po.model.Page;
@@ -90,7 +93,7 @@ public class UserController extends BaseController {
 	
 	/**
 	 * 
-	 * @Description TODO(登陆)
+	 * @Description TODO(登陆页)
 	 * @return
 	 */
 	@RequestMapping("/login")
@@ -99,16 +102,24 @@ public class UserController extends BaseController {
     }
 	
 	 /**
-     * @Description (登陆)
-     * @param user
-     * @return
-     */
+	  * 
+	  * @Description TODO(登陆方法)
+	  * @param loginAcct
+	  * @param adminPswd
+	  * @param rememberMe
+	  * @param request
+	  * @return
+	  */
     @RequestMapping("login.do")
     public @ResponseBody AjaxResponse<String> login(@RequestParam(value = "account") String loginAcct,
             @RequestParam(value = "password") String adminPswd,
             String rememberMe,
             HttpServletRequest request
             ) {
+        
+        String rootPath = request.getSession().getServletContext().getRealPath("/resources/images/");
+        System.out.println("rootPath :"+rootPath);
+        
         final String REMEMBERME = "1";
         AjaxResponse<String> ajaxResponse = new AjaxResponse<>();
         Subject currentUser = SecurityUtils.getSubject();
@@ -148,5 +159,84 @@ public class UserController extends BaseController {
         session.setAttribute(Constants.SESSION_USER_KEY, sessionUser);
         return ajaxResponse;
     }
-	
+    
+    /**
+     * 
+     * @Description TODO(获得用户头像)
+     * @param loginAcct
+     * @return
+     */
+    @RequestMapping("/findHeadImage")
+    public @ResponseBody AjaxResponse<Object> findHeadImage(@RequestParam(value = "account") String loginAcct){
+        AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>();
+        String headIcon = null;
+        try {
+            headIcon = userService.findHeadIcon(loginAcct);
+            ajaxResponse.setResponseCode(ResponseCode.SUCCESS);
+            ajaxResponse.setData(headIcon);
+        } catch (BussinessException e) {
+            ajaxResponse.setErrorMsg(e.getLocalizedMessage());
+            ajaxResponse.setResponseCode(ResponseCode.BUSSINESSERROR);
+            logger.error("头像获取失败,账户{}异常{}", loginAcct, e.getLocalizedMessage());
+        }
+        catch (Exception e) {
+            ajaxResponse.setErrorMsg(ResponseCode.SERVERERROR.getDesc());
+            ajaxResponse.setResponseCode(ResponseCode.SERVERERROR);
+            logger.error("头像获取失败,账户{}异常{}", loginAcct, e.getLocalizedMessage());
+        }
+        return ajaxResponse;
+    }
+    
+    /**
+     * 
+     * @Description TODO(注册页)
+     * @return
+     */
+    @RequestMapping("/register")
+    public String register(){
+        
+        return "/page/register";
+    }
+    
+    
+    /**
+     * 
+     * @Description TODO(注册方法)
+     * @param session
+     * @param user
+     * @return
+     */
+    @RequestMapping("/register.do")
+    public @ResponseBody AjaxResponse<Object> registerdo(HttpSession session, @Valid User user, BindingResult bindingResult){
+        AjaxResponse<Object> ajaxResponse = new AjaxResponse<Object>();
+        try {
+            
+            String userName = user.getUserName();
+            String password = user.getPassword();
+            //注册成功
+            userService.register(user);
+            //登陆
+            Subject currentUser = SecurityUtils.getSubject();
+            UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+            currentUser.login(token);
+            
+            ajaxResponse.setResponseCode(ResponseCode.SUCCESS);
+            SessionUser sessionUser = new SessionUser();
+            sessionUser.setUserid(user.getUserId());
+            sessionUser.setUserName(user.getUserName());
+            sessionUser.setUserIcon(user.getUserIcon());
+            session.setAttribute(Constants.SESSION_USER_KEY, sessionUser);
+        } catch (BussinessException e) {
+            ajaxResponse.setErrorMsg(e.getLocalizedMessage());
+            ajaxResponse.setResponseCode(ResponseCode.BUSSINESSERROR);
+            logger.error("用户注册失败,用户名:{}邮箱:{}", user.getUserName(), user.getEmail());
+        }catch (Exception e) {
+            e.getLocalizedMessage();
+            ajaxResponse.setErrorMsg(ResponseCode.SERVERERROR.getDesc()+"注册成功，自动登陆失败！");
+            ajaxResponse.setResponseCode(ResponseCode.SERVERERROR);
+            logger.error("用户登陆失败,用户名:{}邮箱:{}", user.getUserName(), user.getEmail());
+        }
+        return ajaxResponse;
+    }
+    
 }

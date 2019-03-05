@@ -49,7 +49,7 @@ public class Constants {
     public static final String MD5_SALT = "709394";
     
     
-    public static final String ABSOLUTEPATH = "/home/default/apache-tomcat-7.0.34/webapps/blog-web";
+    public static final String ABSOLUTEPATH = "G:/Tomcat/apache-tomcat-7.0.91/webapps/rece-web";
     public static final String DOMAIN = "http://www.afanee.top";
     
 }

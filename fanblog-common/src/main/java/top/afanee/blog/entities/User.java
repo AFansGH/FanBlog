@@ -2,6 +2,10 @@ package top.afanee.blog.entities;
 
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Table(name = "fanblog_user")
 public class User {
@@ -9,12 +13,19 @@ public class User {
     @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer userId;
+    
 
+    @NotEmpty(message = "邮箱不能为空")
+    @Email(message = "邮箱格式不正确")
     private String email;
 
     @Column(name = "user_name")
+    @NotEmpty(message = "账号不能为空")
+    @Pattern(regexp = "[a-zA-Z0-9_]{5,18}$", message = "账号为字母开头，允许6-18字节，允许字母数字下划线")
     private String userName;
     
+    @NotEmpty(message = "密码不能为空")
+    @Pattern(regexp = "[a-zA-Z0-9_]{5,18}$", message = "密码长度允许6-18字节，支持字母数字下划线")
     private String password;
 
     @Column(name = "user_icon")
