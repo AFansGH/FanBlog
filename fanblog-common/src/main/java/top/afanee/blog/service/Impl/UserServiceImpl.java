@@ -37,6 +37,17 @@ public class UserServiceImpl implements UserService {
     public User findUserByUserId(Integer userId) {
         return this.userMapper.selectByPrimaryKey(userId);
     }
+    
+    @Override
+    public User findUserInfo4UserHome(Integer userId) throws BussinessException {
+        User user = this.findUserByUserId(userId);
+        if(user == null){
+            throw new BussinessException("用户不存在");
+        }
+        user.setPassword(null);
+        user.setActivationCode(null);
+        return user;
+    }
 
     @Override
     public User login(Subject currentUser, UsernamePasswordToken token) {
@@ -148,4 +159,6 @@ public class UserServiceImpl implements UserService {
     public void updateUserWithoutValidate(User user) {
         this.userMapper.updateByPrimaryKeySelective(user);
     }
+
+    
 }

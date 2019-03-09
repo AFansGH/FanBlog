@@ -59,6 +59,10 @@ public class User {
     
     @Column(name = "account_state")
     private Boolean accountState;
+    
+    //用户主页样式
+    @Transient
+    private Integer userPage = 1;
 
     
     public Boolean getAccountState() {
@@ -292,5 +296,15 @@ public class User {
      */
     public void setActivationCode(String activationCode) {
         this.activationCode = activationCode;
+    }
+
+
+    public Integer getUserPage() {
+        return userPage;
+    }
+
+
+    public void setUserPage(Integer userPage) {
+        this.userPage = userPage;
     }
 }

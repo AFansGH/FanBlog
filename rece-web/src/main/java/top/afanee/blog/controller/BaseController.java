@@ -36,7 +36,7 @@ public class BaseController {
 	
 
 	
-	public Integer getUserid(HttpSession session){
+	public Integer getUserId(HttpSession session){
 		Object sessionObject = session.getAttribute(Constants.SESSION_USER_KEY);
 		if(sessionObject != null){
 			return ((SessionUser)sessionObject).getUserid();

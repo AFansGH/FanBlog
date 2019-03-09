@@ -13,6 +13,9 @@ public interface UserService {
 	List<User> getAll();
 
     User findUserByUserId(Integer userId);
+    
+    //查询user对象到前台，需要将密码与激活码置为null
+    User findUserInfo4UserHome(Integer userId) throws BussinessException;
 
     User login(Subject currentUser, UsernamePasswordToken token);
 
@@ -21,4 +24,7 @@ public interface UserService {
     void register(User user) throws BussinessException;
     
     Boolean available(String loginAcct) throws BussinessException;
+
+   
+
 }

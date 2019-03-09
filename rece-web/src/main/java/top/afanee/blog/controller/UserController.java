@@ -71,7 +71,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/")
 	public ModelAndView index(HttpSession session){
-		Integer userid = this.getUserid(session);
+		Integer userid = this.getUserId(session);
 		ModelAndView view = new ModelAndView("/page/index");
 		//若用户登陆，查询用户签到信息
 		if(userid !=null){
