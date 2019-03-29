@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.github.pagehelper.PageInfo;
 
 import top.afanee.blog.entity.Ask;
 import top.afanee.blog.entity.Blog;
@@ -31,11 +30,14 @@ import top.afanee.blog.entity.Knowledge;
 import top.afanee.blog.entity.Topic;
 import top.afanee.blog.entity.User;
 import top.afanee.blog.exception.BussinessException;
-import top.afanee.blog.po.enums.PageSize;
 import top.afanee.blog.po.enums.ResponseCode;
-import top.afanee.blog.po.model.Page;
+import top.afanee.blog.po.model.PageResult;
 import top.afanee.blog.po.model.SessionUser;
 import top.afanee.blog.po.model.SignInfo;
+import top.afanee.blog.po.query.AskQuery;
+import top.afanee.blog.po.query.BlogQuery;
+import top.afanee.blog.po.query.KnowledgeQuery;
+import top.afanee.blog.po.query.TopicQuery;
 import top.afanee.blog.po.vo.AjaxResponse;
 import top.afanee.blog.service.AskService;
 import top.afanee.blog.service.BlogService;
@@ -78,14 +80,13 @@ public class UserController extends BaseController {
 			SignInfo signInfo = this.signInService.findSignInfoByUserId(userId);
 			view.addObject("signInfo", signInfo);
 		}
-		Page page = new Page(1, PageSize.PAGE_SIZE20.getSize());
-		PageInfo<Topic> topics = this.topicService.findTopicByPage(page);
+		PageResult<Topic> topics = this.topicService.findTopicByPage(new TopicQuery());
 		view.addObject("topics", topics);
-		PageInfo<Knowledge> knowledges = this.knowledgeService.findKnowledgeByPage(page);
+		PageResult<Knowledge> knowledges = this.knowledgeService.findKnowledgeByPage(new KnowledgeQuery());
 		view.addObject("knowledges", knowledges);
-		PageInfo<Ask> asks = this.askService.findAskByPage(page);
+		PageResult<Ask> asks = this.askService.findAskByPage(new AskQuery());
 		view.addObject("asks", asks);
-		PageInfo<Blog> blogs = this.blogService.findBlogByPage(page);
+		PageResult<Blog> blogs = this.blogService.findBlogByPage(new BlogQuery());
 		view.addObject("blogs", blogs);
 		
 		return view;

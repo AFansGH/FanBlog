@@ -2,11 +2,18 @@ package top.afanee.blog.service.Impl;
 
 import top.afanee.blog.entity.Knowledge;
 import top.afanee.blog.mapper.KnowledgeMapper;
-import top.afanee.blog.po.model.Page;
+import top.afanee.blog.po.enums.OrderByEnum;
+import top.afanee.blog.po.model.PageResult;
+import top.afanee.blog.po.query.KnowledgeQuery;
 import top.afanee.blog.service.KnowledgeService;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.github.pagehelper.PageInfo;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,11 +26,19 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class KnowledgeServiceImpl extends ServiceImpl<KnowledgeMapper, Knowledge> implements KnowledgeService {
-
+    
+    @Autowired
+    private KnowledgeMapper knowledgeMapper;
+    
     @Override
-    public PageInfo<Knowledge> findKnowledgeByPage(Page page) {
-        // TODO Auto-generated method stub
-        return null;
+    public PageResult<Knowledge> findKnowledgeByPage(KnowledgeQuery knowledgeQuery) {
+        Page<Knowledge> page = new Page<>(knowledgeQuery.getPageOn(), knowledgeQuery.getPageSize());
+        EntityWrapper<Knowledge> wrapper = new EntityWrapper<>();
+        wrapper.orderBy(OrderByEnum.CREATE_TIME_DESC.getOrderBy());
+        List<Knowledge> topicList = knowledgeMapper.selectPage(page, wrapper);
+        PageResult<Knowledge> pageResult = new PageResult<>(page,topicList);
+        return pageResult;
     }
+
 
 }

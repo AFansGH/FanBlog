@@ -1,10 +1,10 @@
 package top.afanee.blog.service;
 
 import top.afanee.blog.entity.Knowledge;
-import top.afanee.blog.po.model.Page;
+import top.afanee.blog.po.model.PageResult;
+import top.afanee.blog.po.query.KnowledgeQuery;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.github.pagehelper.PageInfo;
 
 /**
  * <p>
@@ -16,6 +16,7 @@ import com.github.pagehelper.PageInfo;
  */
 public interface KnowledgeService extends IService<Knowledge> {
 
-    PageInfo<Knowledge> findKnowledgeByPage(Page page);
+    PageResult<Knowledge> findKnowledgeByPage(KnowledgeQuery knowledgeQuery);
+
 
 }

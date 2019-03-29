@@ -1,10 +1,10 @@
 package top.afanee.blog.service;
 
 import top.afanee.blog.entity.Ask;
-import top.afanee.blog.po.model.Page;
+import top.afanee.blog.po.model.PageResult;
+import top.afanee.blog.po.query.AskQuery;
 
 import com.baomidou.mybatisplus.service.IService;
-import com.github.pagehelper.PageInfo;
 
 /**
  * <p>
@@ -16,6 +16,7 @@ import com.github.pagehelper.PageInfo;
  */
 public interface AskService extends IService<Ask> {
 
-    PageInfo<Ask> findAskByPage(Page page);
+    PageResult<Ask> findAskByPage(AskQuery askQuery);
+
 
 }
