@@ -3,25 +3,18 @@ package top.afanee.blog.po.model;
 
 public class Page {
     
-    private Integer pageOn;
-    private Integer pageSize;
+    private Integer pageNum;
+    private Integer pageSize = 6;
     
     public Page(){
         
     }
     
-    public Page(Integer pageOn, Integer pageSize){
-        this.pageOn = pageOn;
+    public Page(Integer pageNum, Integer pageSize){
+        this.setPageNum(pageNum);
         this.pageSize = pageSize;
     }
     
-    public Integer getPageOn() {
-        return pageOn;
-    }
-    
-    public void setPageOn(Integer pageOn) {
-        this.pageOn = pageOn;
-    }
     
     public Integer getPageSize() {
         return pageSize;
@@ -30,5 +23,19 @@ public class Page {
     public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
+
+    public Integer getPageNum() {
+        return pageNum;
+    }
+
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
+    }
+
+    @Override
+    public String toString() {
+        return "Page [pageNum=" + pageNum + ", pageSize=" + pageSize + "]";
+    }
+    
     
 }

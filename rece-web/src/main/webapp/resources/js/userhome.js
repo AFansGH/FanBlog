@@ -194,7 +194,7 @@ function topicItem(data){
 function loadTopic(page){
     var topic_content = $("#topic-content");
     $('<div id="loading"> <div class="loading-con"><img src="' + fzqblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo(topic_content);
-    fzqblog.topicPage= page;
+    fzqblog.topicPage = page;
     $.ajax({
     	url: fzqblog.centerUrl.loadTopic,
     	type: 'POST',
@@ -209,12 +209,12 @@ function loadTopic(page){
 		    if (list.length == 0) {
 			$("<span class='no-data'>没有帖子</span>").appendTo(topic_content);
 		    }
-		    var simplePage = res.data.page;
+		    var simplePage = res.data;
 		    for (var i = 0, _len = list.length, d; i < _len, d = list[i]; i++) {
 			new topicItem(d).appendTo(topic_content);
 		    }
 		   
-		    if(simplePage.pageTotal>simplePage.pageNum){
+		    if(simplePage.pageNum>simplePage.pages){
 			 	$('<div id="shuoshuoload-more" class="load-more"><a href="javascript:;">⇓加载更多</a></div>').appendTo(topic_content);
 				}
 		   	}
@@ -293,7 +293,7 @@ function loadAsk(page){
 				new askItem(d).appendTo(topic_content);
 			    }
 			   
-			    if(simplePage.pageTotal>simplePage.pageNum){
+			    if(simplePage.pages>simplePage.pageNum){
 				 	$('<div id="askload-more" class="load-more"><a href="javascript:;">⇓加载更多</a></div>').appendTo(topic_content);
 					}
 			   	}

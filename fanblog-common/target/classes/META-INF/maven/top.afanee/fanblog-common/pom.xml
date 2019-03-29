@@ -9,26 +9,6 @@
 	<artifactId>fanblog-common</artifactId>
 
 
-	<properties>
-		<!-- ${basedir}引用工程根目录 -->
-		<!-- targetJavaProject：声明存放源码的目录位置 -->
-		<targetJavaProject>${basedir}/src/main/java</targetJavaProject>
-
-		<!-- targetMapperPackage：声明MBG生成XxxMapper接口后存放的package位置 -->
-		<targetMapperPackage>top.afanee.blog.mappers</targetMapperPackage>
-
-		<!-- targetModelPackage：声明MBG生成实体类后存放的package位置 -->
-		<targetModelPackage>top.afanee.blog.entities</targetModelPackage>
-
-		<!-- targetResourcesProject：声明存放资源文件和XML配置文件的目录位置 -->
-		<targetResourcesProject>${basedir}/src/main/resources</targetResourcesProject>
-
-		<!-- targetXMLPackage：声明存放具体XxxMapper.xml文件的目录位置 -->
-		<targetXMLPackage>mappers</targetXMLPackage>
-	</properties>
-
-
-
 	<dependencies>
 
 		<dependency>
@@ -88,25 +68,25 @@
 			<artifactId>spring-test</artifactId>
 		</dependency>
 
-		<!-- mybatis -->
+
+		<!-- 分页 -->
 		<dependency>
-			<groupId>tk.mybatis</groupId>
-			<artifactId>mapper</artifactId>
-			<version>4.0.0-beta3</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>${mybatis.version}</version>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>${pagehelper.version}</version>
 		</dependency>
 
-		<!-- spring整合mybatis -->
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<version>${mybatis.spring.version}</version>
+		<!-- mybatisplus -->
+		<dependency>			
+			<groupId>org.apache.velocity</groupId>			
+			<artifactId>velocity-engine-core</artifactId>			
+			<version>2.0</version>		
 		</dependency>
-
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus</artifactId>
+			<version>2.3</version>
+		</dependency>
 
 		<!-- 权限框架shiro -->
 		<dependency>
@@ -177,29 +157,6 @@
 			<version>${commons.fileupload}</version>
 		</dependency>
 
-		<!-- 分页 -->
-		<dependency>
-			<groupId>com.github.pagehelper</groupId>
-			<artifactId>pagehelper</artifactId>
-			<version>${pagehelper.version}</version>
-		</dependency>
-
-		<!-- json -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
 
 		<!-- freemarker -->
 		<dependency>
@@ -270,25 +227,11 @@
 			<version>6.8.7</version>
 		</dependency>
 
-		<!-- logback -->
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.1.2</version>
-		</dependency>
-
 		<!-- 缩列图 -->
 		<dependency>
 			<groupId>net.coobird</groupId>
 			<artifactId>thumbnailator</artifactId>
 			<version>0.4.8</version>
-		</dependency>
-
-		<!-- 格式化日期,输出几天前,几小时前,几分钟前 -->
-		<dependency>
-			<groupId>org.ocpsoft.prettytime</groupId>
-			<artifactId>prettytime</artifactId>
-			<version>4.0.1.Final</version>
 		</dependency>
 
 		<!-- xss注入防止 -->
@@ -362,32 +305,6 @@
 					<target>${jdk.version}</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
-			</plugin>
-
-			<!-- 通用mapper使用mvn生成配置 -->
-			<plugin>
-				<groupId>org.mybatis.generator</groupId>
-				<artifactId>mybatis-generator-maven-plugin</artifactId>
-				<version>1.3.2</version>
-				<!-- 配置generatorConfig.xml配置文件的路径 -->
-				<configuration>
-					<configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
-					<overwrite>true</overwrite>
-					<verbose>true</verbose>
-				</configuration>
-				<!-- MBG插件的依赖信息 -->
-				<dependencies>
-					<dependency>
-						<groupId>mysql</groupId>
-						<artifactId>mysql-connector-java</artifactId>
-						<version>${mysql.connector}</version>
-					</dependency>
-					<dependency>
-						<groupId>tk.mybatis</groupId>
-						<artifactId>mapper</artifactId>
-						<version>${mapper.version}</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 		</plugins>
 	</build>

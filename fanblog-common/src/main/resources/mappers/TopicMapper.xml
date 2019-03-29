@@ -1,29 +1,34 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="top.afanee.blog.mappers.TopicMapper" >
-  <resultMap id="BaseResultMap" type="top.afanee.blog.entities.Topic" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="topic_id" property="topicId" jdbcType="INTEGER" />
-    <result column="topic_type" property="topicType" jdbcType="INTEGER" />
-    <result column="p_category_id" property="pCategoryId" jdbcType="INTEGER" />
-    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
-    <result column="title" property="title" jdbcType="VARCHAR" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="user_icon" property="userIcon" jdbcType="VARCHAR" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <result column="last_comment_time" property="lastCommentTime" jdbcType="TIMESTAMP" />
-    <result column="comment_count" property="commentCount" jdbcType="INTEGER" />
-    <result column="read_count" property="readCount" jdbcType="INTEGER" />
-    <result column="collection_count" property="collectionCount" jdbcType="INTEGER" />
-    <result column="like_count" property="likeCount" jdbcType="INTEGER" />
-    <result column="grade" property="grade" jdbcType="INTEGER" />
-    <result column="essence" property="essence" jdbcType="INTEGER" />
-    <result column="content" property="content" jdbcType="LONGVARCHAR" />
-    <result column="summary" property="summary" jdbcType="LONGVARCHAR" />
-    <result column="topic_image" property="topicImage" jdbcType="LONGVARCHAR" />
-    <result column="topic_image_thum" property="topicImageThum" jdbcType="LONGVARCHAR" />
-  </resultMap>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.afanee.blog.mapper.TopicMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="top.afanee.blog.entity.Topic">
+        <id column="topic_id" property="topicId" />
+        <result column="topic_type" property="topicType" />
+        <result column="p_category_id" property="pCategoryId" />
+        <result column="category_id" property="categoryId" />
+        <result column="title" property="title" />
+        <result column="content" property="content" />
+        <result column="summary" property="summary" />
+        <result column="user_id" property="userId" />
+        <result column="user_icon" property="userIcon" />
+        <result column="user_name" property="userName" />
+        <result column="create_time" property="createTime" />
+        <result column="last_comment_time" property="lastCommentTime" />
+        <result column="comment_count" property="commentCount" />
+        <result column="read_count" property="readCount" />
+        <result column="collection_count" property="collectionCount" />
+        <result column="like_count" property="likeCount" />
+        <result column="grade" property="grade" />
+        <result column="essence" property="essence" />
+        <result column="topic_image" property="topicImage" />
+        <result column="topic_image_thum" property="topicImageThum" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        topic_id, topic_type, p_category_id, category_id, title, content, summary, user_id, user_icon, user_name, create_time, last_comment_time, comment_count, read_count, collection_count, like_count, grade, essence, topic_image, topic_image_thum
+    </sql>
+
 </mapper>

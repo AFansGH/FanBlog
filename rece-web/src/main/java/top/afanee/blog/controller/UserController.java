@@ -25,11 +25,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 
-import top.afanee.blog.entities.Ask;
-import top.afanee.blog.entities.Blog;
-import top.afanee.blog.entities.Knowledge;
-import top.afanee.blog.entities.Topic;
-import top.afanee.blog.entities.User;
+import top.afanee.blog.entity.Ask;
+import top.afanee.blog.entity.Blog;
+import top.afanee.blog.entity.Knowledge;
+import top.afanee.blog.entity.Topic;
+import top.afanee.blog.entity.User;
 import top.afanee.blog.exception.BussinessException;
 import top.afanee.blog.po.enums.PageSize;
 import top.afanee.blog.po.enums.ResponseCode;
@@ -71,11 +71,11 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/")
 	public ModelAndView index(HttpSession session){
-		Integer userid = this.getUserId(session);
+		Integer userId = this.getUserId(session);
 		ModelAndView view = new ModelAndView("/page/index");
 		//若用户登陆，查询用户签到信息
-		if(userid !=null){
-			SignInfo signInfo = this.signInService.findSignInfoByUserid(userid);
+		if(userId !=null){
+			SignInfo signInfo = this.signInService.findSignInfoByUserId(userId);
 			view.addObject("signInfo", signInfo);
 		}
 		Page page = new Page(1, PageSize.PAGE_SIZE20.getSize());

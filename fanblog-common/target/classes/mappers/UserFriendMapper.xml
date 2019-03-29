@@ -1,16 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="top.afanee.blog.mappers.UserFriendMapper" >
-  <resultMap id="BaseResultMap" type="top.afanee.blog.entities.UserFriend" >
-    <!--
-      WARNING - @mbg.generated
-    -->
-    <id column="user_id" property="userId" jdbcType="INTEGER" />
-    <id column="friend_user_id" property="friendUserId" jdbcType="INTEGER" />
-    <result column="user_icon" property="userIcon" jdbcType="VARCHAR" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="friend_user_icon" property="friendUserIcon" jdbcType="VARCHAR" />
-    <result column="friend_user_name" property="friendUserName" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-  </resultMap>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.afanee.blog.mapper.UserFriendMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="top.afanee.blog.entity.UserFriend">
+        <id column="user_id" property="userId" />
+        <result column="friend_user_id" property="friendUserId" />
+        <result column="user_icon" property="userIcon" />
+        <result column="user_name" property="userName" />
+        <result column="friend_user_icon" property="friendUserIcon" />
+        <result column="friend_user_name" property="friendUserName" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        user_id, friend_user_id, user_icon, user_name, friend_user_icon, friend_user_name, create_time
+    </sql>
+
 </mapper>

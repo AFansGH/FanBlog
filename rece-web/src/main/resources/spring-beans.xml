@@ -34,9 +34,9 @@
 		<property name="locations">
 			<list>
 				<value>classpath:admin-config.properties</value>
-				<value>
+				<!-- <value>
 					file:/webapp/config/admin-config.properties
-				</value>
+				</value> -->
 			</list>
 		</property>
 	</bean>
@@ -69,30 +69,55 @@
     </bean> 
     
     <!-- 扫描所有的mapper.xml -->
-     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
-		<property name="dataSource" ref="dataSource" />  
-		<property name="mapperLocations" value="classpath:mappers/*.xml"></property>
-		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	<bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 自动扫描Mapping.xml文件 -->
+        <property name="mapperLocations" value="classpath:mappers/*.xml"/>
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!-- <property name="typeAliasesPackage" value="com.baomidou.springmvc.model.*"/> -->
+        <property name="plugins">
+            <array>
+                <!-- 分页插件配置 -->
+                <bean id="paginationInterceptor" class="com.baomidou.mybatisplus.plugins.PaginationInterceptor">
+                    <property name="dialectType" value="mysql"/>
+                </bean>
+            </array>
+        </property>
+        <!-- 全局配置注入 -->
+        <property name="globalConfig" ref="globalConfig" /> 
 	</bean>
 	
-	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">
-		<constructor-arg index="0"  ref="sqlSessionFactory" />
-	</bean>
-   
-    <!-- 整合通用Mapper所需要做的配置修改： -->
-	<!-- 原始全类名：org.mybatis.spring.mapper.MapperScannerConfigurer -->
-	<!-- 通用Mapper使用：tk.mybatis.spring.mapper.MapperScannerConfigurer -->
-	<bean class="tk.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="top.afanee.blog.mappers"/>
-		<!-- 使用自定义mapper是，需要配置此项 -->
-		<!-- <property name="properties">
-			<value>
-				mappers=com.atguigu.mapper.mine_mappers.MyMapper
-			</value>
-		</property> -->
+	
+	<bean id="globalConfig" class="com.baomidou.mybatisplus.entity.GlobalConfiguration">
+        <!-- 
+            AUTO->`0`("数据库ID自增")
+            INPUT->`1`(用户输入ID")
+            ID_WORKER->`2`("全局唯一ID")
+            UUID->`3`("全局唯一ID")
+        -->
+        <property name="idType" value="0" />
+        <!--
+            MYSQL->`mysql`
+            ORACLE->`oracle`
+            DB2->`db2`
+            H2->`h2`
+            HSQL->`hsql`
+            SQLITE->`sqlite`
+            POSTGRE->`postgresql`
+            SQLSERVER2005->`sqlserver2005`
+            SQLSERVER->`sqlserver`
+        -->
+        <!-- Oracle需要添加该项 -->
+        <!-- <property name="dbType" value="oracle" /> -->
+        <!-- 全局表为下划线命名设置 true -->
+        <property name="dbColumnUnderline" value="true" />
+    </bean>
+	
+	<!-- 配置mybatis 扫描mapper接口的路径, 相当于注解@MapperScan，@MapperScan("com.baomidou.mybatisplus.test.h2.entity.mapper")-->
+	<bean id="mapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    	<property name="basePackage" value="top.afanee.blog.mapper"/>
 	</bean>
 
-   
     <!-- 配置ibatis的局部事务管理器，使用DataSourceTransactionManager类-->
     <tx:annotation-driven transaction-manager="transactionManager"  proxy-target-class="true"/>
 	<bean id="transactionManager"
