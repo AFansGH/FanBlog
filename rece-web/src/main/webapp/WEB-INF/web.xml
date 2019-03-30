@@ -17,7 +17,7 @@
 
 	<!-- Bootstraps the root web application context before servlet initialization -->
 	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+		<listener-class>top.afanee.blog.listener.BloContextLoaderListener</listener-class>
 	</listener>
 	
 	

@@ -116,17 +116,17 @@ function dispatchLoad(type) {
 }
 
 
-	function loadShuoShuos(pageNum){
+	function loadShuoShuos(pageOn){
 		var tagcontent = $(".tag-content").eq(0);
 		var tag_content = $('<section id="cd-timeline" class="cd-container"></section>').appendTo(tagcontent);
-		fzqblog.pageNum = pageNum;
+		fzqblog.pageOn = pageOn;
 		$("#load-more").remove();
     	$('<div id="loading"> <div class="loading-con"><img src="' + fzqblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo(tagcontent);
 		$.ajax({
 			url: fzqblog.centerUrl.loadShuoShuos,
 			type: 'POST',
 			dataType: 'json',
-			data: {"pageNum": fzqblog.pageNum,
+			data: {"pageOn": fzqblog.pageOn,
 					"userId": fzqblog.center.userId
 					},
 			success:function(res){
@@ -140,7 +140,7 @@ function dispatchLoad(type) {
 					for (var i = 0, _len = list.length, data; i < _len, data = list[i]; i++) {
 					new ShuoShuoItem(data).appendTo(tag_content);
 					}
-					if (simplePage.pageTotal > simplePage.pageNum) {
+					if (simplePage.pageTotal > simplePage.pageOn) {
 					$('<div id="load-more" class="load-more"><a href="javascript:;">⇓加载更多</a></div>').appendTo(tag_content);
 					}
 				}
@@ -170,7 +170,7 @@ function topicItem(data){
 	 $('<span class="vote">投票</span>').appendTo(topic_item_title);
     }
     $("<a href='"+fzqblog.realpath+"/bbs/"+data.topicId+"' target='_blank' class='title'>"+data.title+"</a>").appendTo(topic_item_title);
-    $('<span class="time">'+data.createTimeString+'</span>').appendTo(topic_item_title);
+    $('<span class="time">'+data.createTime+'</span>').appendTo(topic_item_title);
     $('<a class="topic-cate-tag"  target="_blank"  href="'+fzqblog.realpath+'/bbs/sub_board/'+data.categoryId+'"><span>'+data.categoryName+'</span></a>').appendTo(topic_item_title);
     $('<div class="topic-item-summary">'+data.summary+'</div>').appendTo(topic_item_info);
     if(data.topicImageArray!=null){
@@ -200,7 +200,7 @@ function loadTopic(page){
     	type: 'POST',
     	dataType: 'json',
     	data: { 
-    	 pageNum : page,
+    	 pageOn : page,
 	   	 userId: fzqblog.center.userId
 	   	},
 	   	success:function(res){
@@ -209,12 +209,12 @@ function loadTopic(page){
 		    if (list.length == 0) {
 			$("<span class='no-data'>没有帖子</span>").appendTo(topic_content);
 		    }
-		    var simplePage = res.data;
+		    var simplePage = res.data.page;
 		    for (var i = 0, _len = list.length, d; i < _len, d = list[i]; i++) {
 			new topicItem(d).appendTo(topic_content);
 		    }
 		   
-		    if(simplePage.pageNum>simplePage.pages){
+		    if(simplePage.pages>simplePage.current){
 			 	$('<div id="shuoshuoload-more" class="load-more"><a href="javascript:;">⇓加载更多</a></div>').appendTo(topic_content);
 				}
 		   	}
@@ -243,7 +243,7 @@ function askItem(data){
     var topic_item_info = $("<div class='topic-item-info'></div>").appendTo(topic_item);
     var topic_item_title = $("<div class='topic-item-title'></div>").appendTo(topic_item_info);
     $("<a href='"+fzqblog.realpath+"/ask/"+data.askId+"' target='_blank' class='title'>"+data.title+"</a>").appendTo(topic_item_title);
-    $('<span class="time">'+data.createTimeString+'</span>').appendTo(topic_item_title);
+    $('<span class="time">'+data.createTime+'</span>').appendTo(topic_item_title);
     $('<div class="topic-item-summary">'+data.summary+'</div>').appendTo(topic_item_info);
     if(data.topicImageArray!=null){
       var topic_item_images =  $('<div class="image-thum topic-item-images"></div>').appendTo(topic_item_info);
@@ -278,8 +278,9 @@ function loadAsk(page){
 	    	url: fzqblog.centerUrl.loadAsk,
 	    	type: 'POST',
 	    	dataType: 'json',
+	    	timeout: 500,
 	    	data: { 
-	    	 pageNum : page,
+	    	 pageOn : page,
 		   	 userId: fzqblog.center.userId
 		   	},
 		   	success:function(res){
@@ -293,11 +294,10 @@ function loadAsk(page){
 				new askItem(d).appendTo(topic_content);
 			    }
 			   
-			    if(simplePage.pages>simplePage.pageNum){
+			    if(simplePage.pages>simplePage.pageOn){
 				 	$('<div id="askload-more" class="load-more"><a href="javascript:;">⇓加载更多</a></div>').appendTo(topic_content);
 					}
 			   	}
-		
 	    });
 }
 
@@ -307,7 +307,7 @@ function knowledgeItem(data){
     var topic_item_info = $("<div class='topic-item-info'></div>").appendTo(topic_item);
     var topic_item_title = $("<div class='topic-item-title'></div>").appendTo(topic_item_info);
     $("<a href='"+fzqblog.realpath+"/knowledge/"+data.topicId+"' target='_blank' class='title'>"+data.title+"</a>").appendTo(topic_item_title);
-    $('<span class="time">'+data.createTimeString+'</span>').appendTo(topic_item_title);
+    $('<span class="time">'+data.createTime+'</span>').appendTo(topic_item_title);
     $('<a class="topic-cate-tag" target="_blank"  href="'+fzqblog.realpath+'/knowledge/categoryId/'+data.categoryId+'">'+data.categoryName+'</a>').appendTo(topic_item_title);
     $('<div class="topic-item-summary">'+data.summary+'</div>').appendTo(topic_item_info);
     if(data.topicImageArray!=null){
@@ -344,7 +344,7 @@ function loadKnowledge(page){
 	    	type: 'POST',
 	    	dataType: 'json',
 	    	data: { 
-	    	 pageNum : page,
+	    	 pageOn : page,
 		   	 userId: fzqblog.center.userId
 		   	},
 		   	success:function(res){
@@ -358,7 +358,7 @@ function loadKnowledge(page){
 				new knowledgeItem(d).appendTo(topic_content);
 			    }
 			   
-			    if(simplePage.pageTotal>simplePage.pageNum){
+			    if(simplePage.pages>simplePage.current){
 				 	$('<div id="knowledgeload-more" class="load-more"><a href="javascript:;">⇓加载更多</a></div>').appendTo(topic_content);
 					}
 			   	}

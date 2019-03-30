@@ -38,11 +38,11 @@
 </div>
 <div class="user-home-info-item">
 	<span class="user-home-info-tit">加入时间:</span>
-	<span class="user-home-info">${user.registerTimeString!'未知'}</span>
+	<span class="user-home-info">${user.registerTime?string('yyyy-MM-dd')!'未知'}</span>
 </div>
 <div class="user-home-info-item">
 	<span class="user-home-info-tit">上次登录:</span>
-	<span class="user-home-info">${user.lastLoginTimeString!'未知'}</span>
+	<span class="user-home-info">${user.lastLoginTime?string('yyyy-MM-dd')!'未知'}</span>
 </div>
 
 

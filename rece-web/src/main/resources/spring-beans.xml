@@ -19,7 +19,9 @@
 	<context:component-scan base-package="top.afanee.blog.service">     
 	    <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 	</context:component-scan>
-
+	<context:component-scan base-package="top.afanee.blog.cache"/> 
+	
+	
 	<!-- PropertyPlaceholderConfigurer,用于spring ${placeholder}的解析 -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

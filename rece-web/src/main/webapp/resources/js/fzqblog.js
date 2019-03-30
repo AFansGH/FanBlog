@@ -137,6 +137,7 @@ $(document).ready(function() {
 			$.ajax({
 				url: fzqblog.realpath + '/login.do',
 				type: 'POST',
+				timeout : 1000,
 				dataType: 'json',
 				data: $('#loginform').serialize(),
 				success: function(data) {

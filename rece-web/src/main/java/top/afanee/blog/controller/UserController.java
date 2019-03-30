@@ -117,10 +117,6 @@ public class UserController extends BaseController {
             String rememberMe,
             HttpServletRequest request
             ) {
-        
-        String rootPath = request.getSession().getServletContext().getRealPath("/resources/images/");
-        System.out.println("rootPath :"+rootPath);
-        
         final String REMEMBERME = "1";
         AjaxResponse<String> ajaxResponse = new AjaxResponse<>();
         Subject currentUser = SecurityUtils.getSubject();

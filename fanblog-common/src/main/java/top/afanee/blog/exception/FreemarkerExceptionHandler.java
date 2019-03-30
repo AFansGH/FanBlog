@@ -14,7 +14,8 @@ import freemarker.template.TemplateExceptionHandler;
 public class FreemarkerExceptionHandler implements TemplateExceptionHandler {
 
 	private static final Logger logger = LoggerFactory.getLogger(FreemarkerExceptionHandler.class);
-
+	
+	@Override
 	public void handleTemplateException(TemplateException te, Environment env, Writer out) throws TemplateException {
 		logger.error("[FreemarkerExceptionHandler][Freemarker Error: " + te.getMessage() + "]");
 		try {
