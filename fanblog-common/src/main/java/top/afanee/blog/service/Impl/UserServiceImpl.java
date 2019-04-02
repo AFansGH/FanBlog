@@ -18,6 +18,7 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -88,6 +89,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
      * 
      */
     @Override
+    @Transactional(rollbackFor = {Exception.class })
     public void register(User user)throws BussinessException{
         String userName = user.getUserName();
         String password = user.getPassword();
@@ -130,6 +132,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return user;
     }
     
+    @Override
     public User findUserByUserName(String userName) {   
         User userQuery = new User();
         userQuery.setUserName(userName);
@@ -137,6 +140,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return user;
     }
 
+    @Override
     public User findUserByEmail(String email) {
         User userQuery = new User();
         userQuery.setEmail(email);

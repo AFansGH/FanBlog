@@ -1,9 +1,9 @@
 .left{width:790px;float: left;}
-.part-title{padding:5px 5px 0px 10px;text-align: left;}
+.part-title{padding:5px 5px 0px 10px;text-align: left;  background: #fff; border-radius:5px;}
 .part-title a.part{text-decoration: none;color: #000;font-weight: 400;font-size: 18px;padding-bottom: 3px;display: inline-block;}
 .part-title a.cate{font-size: 13px;text-decoration: none;display: inline-block;margin-left: 10px;}
 .part-title a.cate:hover{text-decoration: underline;}
-.data-list{margin-bottom:10px;border: 1px solid #ccc;padding: 5px;padding-bottom: 10px;border-radius:8px;}
+.data-list{margin-bottom:10px;border: 1px solid #ccc; padding: 5px;padding-bottom: 10px;border-radius:15px; background: #fff}
 .data-list:hover{
 	-moz-box-shadow: 2px 2px 10px #909090;/*firefox*/
 	-webkit-box-shadow: 2px 2px 10px #909090;/*safari或chrome*/
@@ -11,7 +11,7 @@
 }
 .ad{margin-bottom: 10px;}
 .ad img{;border-radius:8px}
-.data-item{padding: 10px 5px 8px 10px;border-bottom: 1px dashed #ccc}
+.data-item{padding: 10px 5px 8px 10px;border-bottom: 1px dashed #ccc;  background: #fff; border-radius:5px;}
 .data-item a.tit{text-decoration: none;color: #494949;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;display: inline-block;max-width:450px;float: left;}
 .data-item a.tit:hover{color:#CC0000}
 .data-item span.time{padding-left: 10px;font-size: 12px;color: #888}

@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<#include "include/top.html">
 	<link rel="stylesheet" type="text/css" href="${realpath}/resources/css/index.css">
-	<title>首页</title>
+	<title>AFan|BBS</title>
 </head>
 <body>
 	<#include "include/header.html">
@@ -13,7 +13,7 @@
 		<div class="left">
 			<div class="data-list">
 				<div class="part-title">
-					<a href="${realpath}/bbs" class="part" target="_blank">讨论区</a>
+					<a href="${realpath}/bbs" class="part" target="_blank">正在讨论</a>
 				</div>
 					<#list topics.list as topic>
 					<div class="data-item">
@@ -29,7 +29,7 @@ ${topic.title}</a>
 			</div>
 			<div class="data-list">
 				<div class="part-title">
-					<a href="${realpath}/knowledge" class="part" target="_blank">知识库</a>
+					<a href="${realpath}/knowledge" class="part" target="_blank">知识</a>
 				</div>
 					<#list knowledges.list as topic>
 					<div class="data-item">
@@ -58,11 +58,9 @@ ${topic.title}</a>
 					</#list>
 			</div>
 		</div>
-		
 			<div class="right">
-				
 		        <div class="part-title">
-						<a href="${realpath}/blog" class="part">最新博文</a>
+						<a href="${realpath}/blog" class="part">最新文章</a>
 				</div>
 				<#list blogs.list as blog>
 					<div class="data-item">
@@ -74,21 +72,7 @@ ${topic.title}</a>
 						</span>
 					</div>
 				</#list>
-				<div class="part-title">
-					<a href="javascript:;" class="part">常用工具</a>
-				</div>
-				<div class="home-tools">
-						<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank">JDK下载</a>
-						<a href="http://dlsw.baidu.com/sw-search-sp/soft/ea/12585/mysql_installer_community_V5.6.21.1_setup.1418020972.msi" target="_blank">MySQL下载</a>
-						<a href="http://c1.cr173.com/xl/JDK_API_1_6_zh_CN.zip" target="_blank">JDK6中文文档</a>
-						<a href="http://pan.baidu.com/s/1kTyYOsf" target="_blank">Jquery中文文档</a>
-						<a href="http://eclipse.stu.edu.tw/technology/epp/downloads/release/mars/1/eclipse-jee-mars-1-win32.zip" target="_blank">Eclipse(32位)</a>
-						<a href="http://eclipse.stu.edu.tw/technology/epp/downloads/release/mars/1/eclipse-jee-mars-1-win32.zip" target="_blank">Eclipse(64位)</a>
-						<a href="https://pan.baidu.com/s/1o6soaj4" target="_blank">Sqlyog破解版(64位)</a>
-				</div>
 		    </div>
-
-		
 		<div class="clear"></div>
 	</div>
 	

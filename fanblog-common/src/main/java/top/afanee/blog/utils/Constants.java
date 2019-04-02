@@ -48,7 +48,7 @@ public class Constants {
     
     public static final String MD5_SALT = "709394";
     
-    
+    //再copy头像时使用到
     public static final String ABSOLUTEPATH = "G:/Tomcat/apache-tomcat-7.0.91/webapps/rece-web";
     public static final String DOMAIN = "http://www.afanee.top";
     

@@ -1,16 +1,16 @@
-fzqblog.tags=["shuoshuo","topic","ask","knowledge","blog","fans","focus"]
-fzqblog.centerUrl={
-    loadShuoShuos:fzqblog.realpath+"/user/loadShuoShuos",
-    loadTopic:fzqblog.realpath+"/user/loadTopic",
-    loadAsk:fzqblog.realpath+"/user/loadAsk",
-    loadKnowledge:fzqblog.realpath+"/user/loadKnowledge",
-    loadFans:fzqblog.realpath+"/user/loadFans",
-    loadFoucs:fzqblog.realpath+"/user/loadFocus"
+fanblog.tags=["shuoshuo","topic","ask","knowledge","blog","fans","focus"]
+fanblog.centerUrl={
+    loadShuoShuos:fanblog.realpath+"/user/loadShuoShuos",
+    loadTopic:fanblog.realpath+"/user/loadTopic",
+    loadAsk:fanblog.realpath+"/user/loadAsk",
+    loadKnowledge:fanblog.realpath+"/user/loadKnowledge",
+    loadFans:fanblog.realpath+"/user/loadFans",
+    loadFoucs:fanblog.realpath+"/user/loadFocus"
 }
 $(function(){
     tag({
 	id : "tag", contentClass : "tag-content", fun : function(index) {
-	    var type = fzqblog.tags[index];
+	    var type = fanblog.tags[index];
 	    var url = window.location.href;
 	    url = url.substring(0, url.lastIndexOf("#"));
 	    window.location.href = url + "#" + type;
@@ -119,15 +119,15 @@ function dispatchLoad(type) {
 	function loadShuoShuos(pageOn){
 		var tagcontent = $(".tag-content").eq(0);
 		var tag_content = $('<section id="cd-timeline" class="cd-container"></section>').appendTo(tagcontent);
-		fzqblog.pageOn = pageOn;
+		fanblog.pageOn = pageOn;
 		$("#load-more").remove();
-    	$('<div id="loading"> <div class="loading-con"><img src="' + fzqblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo(tagcontent);
+    	$('<div id="loading"> <div class="loading-con"><img src="' + fanblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo(tagcontent);
 		$.ajax({
-			url: fzqblog.centerUrl.loadShuoShuos,
+			url: fanblog.centerUrl.loadShuoShuos,
 			type: 'POST',
 			dataType: 'json',
-			data: {"pageOn": fzqblog.pageOn,
-					"userId": fzqblog.center.userId
+			data: {"pageOn": fanblog.pageOn,
+					"userId": fanblog.center.userId
 					},
 			success:function(res){
 				 $("#loading").remove();
@@ -152,7 +152,7 @@ function dispatchLoad(type) {
 
 	$(document).on("click", "#shuoshuoload-more", function() {
 		$(this).remove();
-		loadTopic(fzqblog.topicPage + 1);
+		loadTopic(fanblog.topicPage + 1);
 
 	});
 
@@ -169,9 +169,9 @@ function topicItem(data){
     if(data.topicType.type==1){
 	 $('<span class="vote">投票</span>').appendTo(topic_item_title);
     }
-    $("<a href='"+fzqblog.realpath+"/bbs/"+data.topicId+"' target='_blank' class='title'>"+data.title+"</a>").appendTo(topic_item_title);
+    $("<a href='"+fanblog.realpath+"/bbs/"+data.topicId+"' target='_blank' class='title'>"+data.title+"</a>").appendTo(topic_item_title);
     $('<span class="time">'+data.createTime+'</span>').appendTo(topic_item_title);
-    $('<a class="topic-cate-tag"  target="_blank"  href="'+fzqblog.realpath+'/bbs/sub_board/'+data.categoryId+'"><span>'+data.categoryName+'</span></a>').appendTo(topic_item_title);
+    $('<a class="topic-cate-tag"  target="_blank"  href="'+fanblog.realpath+'/bbs/sub_board/'+data.categoryId+'"><span>'+data.categoryName+'</span></a>').appendTo(topic_item_title);
     $('<div class="topic-item-summary">'+data.summary+'</div>').appendTo(topic_item_info);
     if(data.topicImageArray!=null){
       var topic_item_images =  $('<div class="image-thum topic-item-images"></div>').appendTo(topic_item_info);
@@ -193,15 +193,15 @@ function topicItem(data){
 
 function loadTopic(page){
     var topic_content = $("#topic-content");
-    $('<div id="loading"> <div class="loading-con"><img src="' + fzqblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo(topic_content);
-    fzqblog.topicPage = page;
+    $('<div id="loading"> <div class="loading-con"><img src="' + fanblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo(topic_content);
+    fanblog.topicPage = page;
     $.ajax({
-    	url: fzqblog.centerUrl.loadTopic,
+    	url: fanblog.centerUrl.loadTopic,
     	type: 'POST',
     	dataType: 'json',
     	data: { 
     	 pageOn : page,
-	   	 userId: fzqblog.center.userId
+	   	 userId: fanblog.center.userId
 	   	},
 	   	success:function(res){
 		   	$("#loading").remove();
@@ -242,7 +242,7 @@ function askItem(data){
     var topic_item = $("<div class='topic-item'></div>");
     var topic_item_info = $("<div class='topic-item-info'></div>").appendTo(topic_item);
     var topic_item_title = $("<div class='topic-item-title'></div>").appendTo(topic_item_info);
-    $("<a href='"+fzqblog.realpath+"/ask/"+data.askId+"' target='_blank' class='title'>"+data.title+"</a>").appendTo(topic_item_title);
+    $("<a href='"+fanblog.realpath+"/ask/"+data.askId+"' target='_blank' class='title'>"+data.title+"</a>").appendTo(topic_item_title);
     $('<span class="time">'+data.createTime+'</span>').appendTo(topic_item_title);
     $('<div class="topic-item-summary">'+data.summary+'</div>').appendTo(topic_item_info);
     if(data.topicImageArray!=null){
@@ -266,22 +266,22 @@ function askItem(data){
 
 	$(document).on("click", "#askload-more", function() {
 		$(this).remove();
-		loadAsk(fzqblog.askPage + 1);
+		loadAsk(fanblog.askPage + 1);
 
 	});
 
 function loadAsk(page){
     var topic_content = $("#ask-content");
-    $('<div id="loading"> <div class="loading-con"><img src="' + fzqblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo(topic_content);
-        fzqblog.askPage= page;
+    $('<div id="loading"> <div class="loading-con"><img src="' + fanblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo(topic_content);
+        fanblog.askPage= page;
 	    $.ajax({
-	    	url: fzqblog.centerUrl.loadAsk,
+	    	url: fanblog.centerUrl.loadAsk,
 	    	type: 'POST',
 	    	dataType: 'json',
 	    	timeout: 500,
 	    	data: { 
 	    	 pageOn : page,
-		   	 userId: fzqblog.center.userId
+		   	 userId: fanblog.center.userId
 		   	},
 		   	success:function(res){
 			   	$("#loading").remove();
@@ -306,9 +306,9 @@ function knowledgeItem(data){
     var topic_item = $("<div class='topic-item'></div>");
     var topic_item_info = $("<div class='topic-item-info'></div>").appendTo(topic_item);
     var topic_item_title = $("<div class='topic-item-title'></div>").appendTo(topic_item_info);
-    $("<a href='"+fzqblog.realpath+"/knowledge/"+data.topicId+"' target='_blank' class='title'>"+data.title+"</a>").appendTo(topic_item_title);
+    $("<a href='"+fanblog.realpath+"/knowledge/"+data.topicId+"' target='_blank' class='title'>"+data.title+"</a>").appendTo(topic_item_title);
     $('<span class="time">'+data.createTime+'</span>').appendTo(topic_item_title);
-    $('<a class="topic-cate-tag" target="_blank"  href="'+fzqblog.realpath+'/knowledge/categoryId/'+data.categoryId+'">'+data.categoryName+'</a>').appendTo(topic_item_title);
+    $('<a class="topic-cate-tag" target="_blank"  href="'+fanblog.realpath+'/knowledge/categoryId/'+data.categoryId+'">'+data.categoryName+'</a>').appendTo(topic_item_title);
     $('<div class="topic-item-summary">'+data.summary+'</div>').appendTo(topic_item_info);
     if(data.topicImageArray!=null){
       var topic_item_images =  $('<div class="image-thum topic-item-images"></div>').appendTo(topic_item_info);
@@ -331,21 +331,21 @@ function knowledgeItem(data){
 
 	$(document).on("click", "#knowledgeload-more", function() {
 		$(this).remove();
-		loadKnowledge(fzqblog.knowledgePage + 1);
+		loadKnowledge(fanblog.knowledgePage + 1);
 
 	});
 
 function loadKnowledge(page){
     var topic_content = $("#knowledge-content");
-    $('<div id="loading"> <div class="loading-con"><img src="' + fzqblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo(topic_content);
-    fzqblog.knowledgePage= page;
+    $('<div id="loading"> <div class="loading-con"><img src="' + fanblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo(topic_content);
+    fanblog.knowledgePage= page;
 	    $.ajax({
-	    	url: fzqblog.centerUrl.loadKnowledge,
+	    	url: fanblog.centerUrl.loadKnowledge,
 	    	type: 'POST',
 	    	dataType: 'json',
 	    	data: { 
 	    	 pageOn : page,
-		   	 userId: fzqblog.center.userId
+		   	 userId: fanblog.center.userId
 		   	},
 		   	success:function(res){
 			   	$("#loading").remove();
@@ -373,13 +373,13 @@ function loadKnowledge(page){
 
 function loadFans(){
     var topic_content = $("#fans-content");
-    $('<div id="loading"> <div class="loading-con"><img src="' + fzqblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo(topic_content);
+    $('<div id="loading"> <div class="loading-con"><img src="' + fanblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo(topic_content);
     $.ajax({
-	 url : fzqblog.centerUrl.loadFans, 
+	 url : fanblog.centerUrl.loadFans, 
 	 type: 'POST',
 	 dataType: 'json',
 		data : {
-	    	friendUserId:fzqblog.center.userId
+	    	friendUserId:fanblog.center.userId
 		}, 
 		success:function(res) {
 	    $("#loading").remove();
@@ -389,7 +389,7 @@ function loadFans(){
 		$("<span class='no-data'>没有粉丝</span>").appendTo(topic_content);
 	    }
 	    for (var i = 0, _len = list.length, d; i < _len, d = list[i]; i++) {
-		$("<li><a href='"+fzqblog.realpath+"/user/"+d.userId+"'><img  src='"+fzqblog.realpath+"/resources/images/"+d.userIcon+"'><span>"+d.userName+"</span></a></li>").appendTo(topic_content);
+		$("<li><a href='"+fanblog.realpath+"/user/"+d.userId+"'><img  src='"+fanblog.realpath+"/resources/images/"+d.userIcon+"'><span>"+d.userName+"</span></a></li>").appendTo(topic_content);
 	    }
 	}
     });
@@ -397,13 +397,13 @@ function loadFans(){
 
 function loadFocus(){
     var topic_content = $("#focus-content");
-    $('<div id="loading"><div class="loading-con"><img src="' + fzqblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo(topic_content);
+    $('<div id="loading"><div class="loading-con"><img src="' + fanblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo(topic_content);
     $.ajax({
-    	url : fzqblog.centerUrl.loadFoucs, 
+    	url : fanblog.centerUrl.loadFoucs, 
 		type: 'POST',
 		dataType: 'json',	
 		data:{
-		    userId:fzqblog.center.userId
+		    userId:fanblog.center.userId
 		}, 
 		success:function(res){
 			 $("#loading").remove();
@@ -413,7 +413,7 @@ function loadFocus(){
 			$("<span class='no-data'>没有关注的人</span>").appendTo(topic_content);
 		    }
 		    for (var i = 0, _len = list.length, d; i < _len, d = list[i]; i++) {
-			$("<li><a href='"+fzqblog.realpath+"/user/"+d.friendUserId+"'><img   src='"+fzqblog.realpath+"/resources/images/"+d.friendUserIcon+"'><span>"+d.friendUserName+"</span></a></li>").appendTo(topic_content);
+			$("<li><a href='"+fanblog.realpath+"/user/"+d.friendUserId+"'><img   src='"+fanblog.realpath+"/resources/images/"+d.friendUserIcon+"'><span>"+d.friendUserName+"</span></a></li>").appendTo(topic_content);
 		    }
 		}
     });

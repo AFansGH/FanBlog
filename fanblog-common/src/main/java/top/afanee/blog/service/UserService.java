@@ -27,5 +27,8 @@ public interface UserService extends IService<User> {
     void register(User user) throws BussinessException ;
 
     User findUserInfo4UserHome(Integer userId) throws BussinessException ;
-
+    
+    User findUserByUserName(String userName);
+    
+    User findUserByEmail(String userName);
 }

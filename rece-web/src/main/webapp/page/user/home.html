@@ -20,7 +20,7 @@
 	
 	<script type="text/javascript" charset="utf-8" src="${realpath}/resources/laypage/laypage.js"></script>
 	<script type="text/javascript">
-		fzqblog.center = {
+		fanblog.center = {
 			userId: "${user.userId?c}",
 		};
 	</script>
@@ -30,10 +30,18 @@
 	<#include "../include/header.html">
 	<div class="main">
 		<div class="user-center-bg" style="background-color:#42332E;background-image: url('${realpath}/resources/images/${user.userBg}')">
-		<div class="user-home-icon"><img id="headicon" class="img-circle" src="${realpath}/resources/images/${user.userIcon}"></div>
-		<div class="user-characters">${user.characters!'这个人很懒，什么也没留下。'}</div>
+			<div class="user-home-icon"><img id="headicon" class="img-circle" src="${realpath}/resources/images/${user.userIcon}"></div>
+			<div class="user-characters">${user.characters!'这个人很懒，什么也没留下。'}</div>
 		</div>
 
+		
+		<style type="text/css">
+			body {
+			background:rgba(255,255,255,1); 
+			
+			}
+		</style>
+		
 		<div class="left">
 			<#include "../include/left.html">
 		</div>

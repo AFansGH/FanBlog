@@ -1,7 +1,6 @@
 package top.afanee.blog.service.Impl;
 
 import top.afanee.blog.entity.SignIn;
-import top.afanee.blog.entity.User;
 import top.afanee.blog.mapper.SignInMapper;
 import top.afanee.blog.po.enums.DateTimePatternEnum;
 import top.afanee.blog.po.model.SignInfo;
@@ -50,7 +49,7 @@ public class SignInServiceImpl extends ServiceImpl<SignInMapper, SignIn> impleme
         else{
             EntityWrapper<SignIn> wrapper2 = new EntityWrapper<>();
             wrapper2.where("user_id = {0}", userId);
-            User user = this.userService.findUserByUserId(userId);
+            //User user = this.userService.findUserByUserId(userId);
             /*signInfo.setMark(user.getMark());*/
             //查询该用户总共签到了多少天
             int userSignInCount = this.signInMapper.selectCount(wrapper);

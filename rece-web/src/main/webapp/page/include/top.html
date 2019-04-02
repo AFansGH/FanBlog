@@ -1,30 +1,30 @@
 <script type="text/javascript">
-		var fzqblog = {};
-		fzqblog.realpath = "${realpath}";
+		var fanblog = {};
+		fanblog.realpath = "${realpath}";
 		<#if Session["session_user_key"]?exists>
-			fzqblog.userId = "${session_user_key.userid?c}";
+			fanblog.userId = "${session_user_key.userid?c}";
 			<#else>
-			fzqblog.userId = 0;
+			fanblog.userId = 0;
 		</#if>
-		fzqblog.curUrl = window.location.href;
+		fanblog.curUrl = window.location.href;
 	</script>
 <link rel="stylesheet" type="text/css" href="${realpath}/resources/bootstrap/css/bootstrap.min.css">
 <script type="text/javascript" src="${realpath}/resources/bootstrap/js/jquery.min.js"></script>
 <script type="text/javascript" src="${realpath}/resources/bootstrap/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${realpath}/resources/artDialog/css/ui-dialog.css">
 <script type="text/javascript" src="${realpath}/resources/artDialog/dist/dialog-min.js"></script>
-<link rel="stylesheet" type="text/css" href="${realpath}/resources/css/fzqblog.css">
+<link rel="stylesheet" type="text/css" href="${realpath}/resources/css/fanblog.css">
 <script type="text/javascript" src="${realpath}/resources/layer/layer.js"></script>
 <link rel="stylesheet" type="text/css" href="${realpath}/resources/animate/animate.css">
 
 <script>
- fzqblog.topUrl = {
-		    loadMessage:fzqblog.realpath+"/admin/load_user_message_list.action",
-		    loadMessageCount:fzqblog.realpath+"/admin/load_user_message_count.action"
+ fanblog.topUrl = {
+		    loadMessage:fanblog.realpath+"/admin/load_user_message_list.action",
+		    loadMessageCount:fanblog.realpath+"/admin/load_user_message_count.action"
 }
      
 
-     if(fzqblog.userId!="0"){
+     if(fanblog.userId!="0"){
     	  getMessageCount();
      }
  
@@ -32,7 +32,7 @@
 function getMessageCount(){
 
 		$.ajax({
-			url : fzqblog.topUrl.loadMessageCount,
+			url : fanblog.topUrl.loadMessageCount,
 			type: 'POST',
 			dataType: 'json',
 			data:{status:0},
@@ -54,7 +54,7 @@ function getMessageCount(){
 //显示消息框
 function showMessageList(){
 	$("#message-dialog").show();
-	if($("#message-data-list").children().length==0&&!fzqblog.isLoading){
+	if($("#message-data-list").children().length==0&&!fanblog.isLoading){
 		loadMessage();
 	}
 }
@@ -67,24 +67,24 @@ function MessageItem(data){
 	var op = $("<div class='message-op'></div>").appendTo(item);
 	$("<span class='time'>发送："+data.createTime+"</span>").appendTo(op);
 	if(data.url!=""){
-	    $('<a href="'+fzqblog.realpath+'/admin/readMessage.action?id='+data.id+'" class="message-detail" class="read-message" url="'+data.url+'" messageId="'+data.id+'">查看详情</a>').appendTo(op);
+	    $('<a href="'+fanblog.realpath+'/admin/readMessage.action?id='+data.id+'" class="message-detail" class="read-message" url="'+data.url+'" messageId="'+data.id+'">查看详情</a>').appendTo(op);
 	}
 	return item;
 }
 
 function loadMessage(page){
-	fzqblog.isLoading = true;
-	fzqblog.messagePageNo = page;
+	fanblog.isLoading = true;
+	fanblog.messagePageNo = page;
     $("#load-more-message").remove();
-    $('<div id="loading-message" class="loading"> <div class="loading-con"><img src="' + fzqblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo($("#message-load"));
+    $('<div id="loading-message" class="loading"> <div class="loading-con"><img src="' + fanblog.realpath + '/resources/images/loading.gif"/><span>正在加载.......</span></div></div>').appendTo($("#message-load"));
 
     $.ajax({
-			url :fzqblog.topUrl.loadMessage,
+			url :fanblog.topUrl.loadMessage,
 			type: 'POST',
 			dataType: 'json',
 			data:{status:0},
 			success:function(res){
-			   fzqblog.isLoading = false;
+			   fanblog.isLoading = false;
         	$("#loading-message").remove();
             var list = res.data.list;
             var simplePage = res.data.page;
@@ -118,7 +118,7 @@ $(document).ready(function() {
                     });
              return;
          }
-    	 if(fzqblog.curUrl.indexOf("search")==-1){
+    	 if(fanblog.curUrl.indexOf("search")==-1){
     		 searchForm.submit();
     	 }else{
     		 searchData();
@@ -128,4 +128,4 @@ $(document).ready(function() {
 });
 
 </script>
-<script type="text/javascript" src="${realpath}/resources/js/fzqblog.js"></script>
+<script type="text/javascript" src="${realpath}/resources/js/fanblog.js"></script>
