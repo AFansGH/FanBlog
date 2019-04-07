@@ -2,7 +2,7 @@
 		var fanblog = {};
 		fanblog.realpath = "${realpath}";
 		<#if Session["session_user_key"]?exists>
-			fanblog.userId = "${session_user_key.userid?c}";
+			fanblog.userId = "${session_user_key.userId?c}";
 			<#else>
 			fanblog.userId = 0;
 		</#if>

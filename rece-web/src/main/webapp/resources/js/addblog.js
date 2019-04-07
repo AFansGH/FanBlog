@@ -1,5 +1,5 @@
 var ue = UE.getEditor('editor');
-fzqblog.autoSveTime = 3 * 60 * 1000;
+fanblog.autoSveTime = 3 * 60 * 1000;
 /**
 上传文件begin
  * */
@@ -9,10 +9,10 @@ var uploader = WebUploader.create({
 	auto: true,
 
 	// swf文件路径
-	swf: fzqblog.realpath + '/resources/webuploader/Uploader.swf',
+	swf: fanblog.realpath + '/resources/webuploader/Uploader.swf',
 
 	// 文件接收服务端。
-	server: fzqblog.realpath + '/fileUpload.action',
+	server: fanblog.realpath + '/fileUpload.action',
 
 	// 选择文件的按钮。可选。
 	// 内部根据当前运行是创建，可能是input元素，也可能是flash.
@@ -26,7 +26,7 @@ var uploader = WebUploader.create({
 	fileSingleSizeLimit: 2 * 1024 * 1024
 });
 uploader.on('fileQueued', function(file) {
-	if (fzqblog.userId == "" || fzqblog.userId == 0) {
+	if (fanblog.userId == "" || fanblog.userId == 0) {
 		goLogin();
 		return;
 	}
@@ -66,7 +66,7 @@ uploader.on('error', function(handler) {
 
 deleteFile = function() {
 	$.ajax({
-		url: fzqblog.realpath + '/fileDelete.action',
+		url: fanblog.realpath + '/fileDelete.action',
 		type: 'POST',
 		dataType: 'json',
 		data: {
@@ -100,7 +100,7 @@ $(document).ready(function() {
 	setInterval(function() {
 		$("#richContent").val(ue.getContent());
 		$.ajax({
-			url: fzqblog.realpath + '/admin/addDraftBlog',
+			url: fanblog.realpath + '/admin/addDraftBlog',
 			type: 'POST',
 			dataType: 'json',
 			data: $("#postBbsForm").serialize(),
@@ -111,18 +111,17 @@ $(document).ready(function() {
 				});
 			}
 		});
-	}, fzqblog.autoSveTime);
+	}, fanblog.autoSveTime);
 });
 
 function addBlog() {
-	if (fzqblog.userId == "" || fzqblog.userId == 0) {
+	if (fanblog.userId == "" || fanblog.userId == 0) {
 		goLogin();
 		return;
 	}
 	var form = $("#postBbsForm");
 	var title = form.find("input[name='title']").val();
 	var categoryId = $("#categoryId").val();
-	var mark = $("#mark").val();
 	if (title == null || $.trim(title) == '') {
 		$("#topicTitle").addClass("has-error");
 		layer.alert("标题不能为空", {
@@ -144,16 +143,6 @@ function addBlog() {
 		$("#richContent").val(ue.getContent());
 		$("#ueContent").removeClass("has-error");
 	}
-	var numberReg = /^\d+$/;
-	if (!numberReg.test(mark)) {
-		$("#needMark").addClass("has-error");
-		layer.alert("积分只能是数字", {
-			icon: 5,
-			skin: 'layer-ext-moon'
-		});
-		return;
-	}
-	$("#needMark").removeClass("has-error");
 	if (categoryId == "0") {
 		layer.confirm('是否不选择分类发表？', {
 			btn: ['是', '否'], //按钮
@@ -171,14 +160,14 @@ function addBlog() {
 
 function publicBlog() {
 	var d = dialog({
-		content: "<div><img src='" + fzqblog.realpath + "/resources/images/loading.gif' />&nbsp;&nbsp;&nbsp;发布中...</div>",
+		content: "<div><img src='" + fanblog.realpath + "/resources/images/loading.gif' />&nbsp;&nbsp;&nbsp;发布中...</div>",
 	});
 	d.showModal();
 	setTimeout(function() {
 		d.close().remove();
 	}, 1000);
 	$.ajax({
-		url: fzqblog.realpath + '/admin/addBlog',
+		url: fanblog.realpath + '/admin/saveBlog',
 		type: 'POST',
 		dataType: 'json',
 		data: $("#postBbsForm").serialize(),
@@ -193,7 +182,7 @@ function publicBlog() {
 					icon: 1,
 					time: 1500 //2秒关闭（如果不配置，默认是3秒）
 				}, function() {
-					document.location.href = fzqblog.realpath + "/user/" + fzqblog.userId + "/blog/" + res.data;
+					document.location.href = fanblog.realpath + "/user/" + fanblog.userId + "/blog/" + res.data;
 				});
 			}
 		}

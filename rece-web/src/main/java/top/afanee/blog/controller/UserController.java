@@ -74,7 +74,7 @@ public class UserController extends BaseController {
 	@RequestMapping("/")
 	public ModelAndView index(HttpSession session){
 		Integer userId = this.getUserId(session);
-		ModelAndView view = new ModelAndView("/page/newIndex");
+		ModelAndView view = new ModelAndView("/page/index");
 		//若用户登陆，查询用户签到信息
 		if(userId !=null){
 			SignInfo signInfo = this.signInService.findSignInfoByUserId(userId);
@@ -130,7 +130,7 @@ public class UserController extends BaseController {
                     // rememberme功能开启
                      token.setRememberMe(true); 
                 }
-                sessionUser.setUserid(user.getUserId());
+                sessionUser.setUserId(user.getUserId());
                 sessionUser.setUserName(user.getUserName());
                 sessionUser.setUserIcon(user.getUserIcon());
                 ajaxResponse.setResponseCode(ResponseCode.SUCCESS);
@@ -219,7 +219,7 @@ public class UserController extends BaseController {
             
             ajaxResponse.setResponseCode(ResponseCode.SUCCESS);
             SessionUser sessionUser = new SessionUser();
-            sessionUser.setUserid(user.getUserId());
+            sessionUser.setUserId(user.getUserId());
             sessionUser.setUserName(user.getUserName());
             sessionUser.setUserIcon(user.getUserIcon());
             session.setAttribute(Constants.SESSION_USER_KEY, sessionUser);

@@ -3,15 +3,15 @@ package top.afanee.blog.po.model;
 
 public class SessionUser {
     
-    private Integer userid;
+    private Integer userId;
     private String userName;
     private String userIcon;
     
-    public Integer getUserid() {
-        return userid;
+    public Integer getUserId() {
+        return userId;
     }
-    public void setUserid(Integer userid) {
-        this.userid = userid;
+    public void setUserId(Integer userid) {
+        this.userId = userid;
     }
     public String getUserName() {
         return userName;

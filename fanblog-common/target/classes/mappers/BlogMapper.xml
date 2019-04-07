@@ -19,7 +19,7 @@
         <result column="like_count" property="likeCount" />
         <result column="blog_image" property="blogImage" />
         <result column="blog_image_thum" property="blogImageThum" />
-        <result column="status" property="status" />
+        <result column="status" property="status"  jdbcType="INTEGER" typeHandler="top.afanee.blog.po.handler.BlogStatusHandler"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->

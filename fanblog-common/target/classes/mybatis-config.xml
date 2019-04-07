@@ -9,6 +9,10 @@
 		<setting name="defaultExecutorType" value="REUSE" />
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 	</settings>
-
+	
+	<typeHandlers>
+		<typeHandler handler="top.afanee.blog.po.handler.BlogStatusHandler" 
+        javaType="top.afanee.blog.po.enums.BlogStatusEnum" jdbcType="INTEGER"/>
+	</typeHandlers>
 	
 </configuration>

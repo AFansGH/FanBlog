@@ -12,13 +12,14 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
      
-     <!-- 启用注解 -->
+     <!-- 启用注解方式的Spring -->
 	<context:annotation-config />
-
-	<!-- 包扫描 -->
+	
+	<!-- Service注解包扫描 -->
 	<context:component-scan base-package="top.afanee.blog.service">     
 	    <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
 	</context:component-scan>
+	<!-- 分类缓存组件 -->
 	<context:component-scan base-package="top.afanee.blog.cache"/> 
 	
 	
@@ -70,7 +71,6 @@
         <property name="logAbandoned" value="${druid.logAbandoned}" /> <!-- 关闭abanded连接时输出错误日志 -->  
     </bean> 
     
-    <!-- 扫描所有的mapper.xml -->
 	<bean id="sqlSessionFactory" class="com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <!-- 自动扫描Mapping.xml文件 -->
@@ -111,7 +111,7 @@
         -->
         <!-- Oracle需要添加该项 -->
         <!-- <property name="dbType" value="oracle" /> -->
-        <!-- 全局表为下划线命名设置 true -->
+        <!-- 全局表为下划线命名设置 true 2.3后默认为true，实体会使用驼峰对应数据表下划线-->
         <property name="dbColumnUnderline" value="true" />
     </bean>
 	
@@ -120,11 +120,14 @@
     	<property name="basePackage" value="top.afanee.blog.mapper"/>
 	</bean>
 
+
     <!-- 配置ibatis的局部事务管理器，使用DataSourceTransactionManager类-->
-    <tx:annotation-driven transaction-manager="transactionManager"  proxy-target-class="true"/>
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	<!-- 启用注解事务（使用配置事务时，也需要指定transactionManager） -->
+    <tx:annotation-driven transaction-manager="transactionManager"  proxy-target-class="true"/>
+	
 	
 </beans>

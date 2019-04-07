@@ -19,7 +19,7 @@ public class BaseController {
 	
 	public void setUserBaseInfo(Class<?> clazz, Object obj, HttpSession session){
 		SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
-		Integer userId = sessionUser.getUserid();
+		Integer userId = sessionUser.getUserId();
 		String userName = sessionUser.getUserName();
 		String userIcon = sessionUser.getUserIcon();
 		try {
@@ -39,7 +39,7 @@ public class BaseController {
 	public Integer getUserId(HttpSession session){
 		Object sessionObject = session.getAttribute(Constants.SESSION_USER_KEY);
 		if(sessionObject != null){
-			return ((SessionUser)sessionObject).getUserid();
+			return ((SessionUser)sessionObject).getUserId();
 		}
 		return null;
 	}

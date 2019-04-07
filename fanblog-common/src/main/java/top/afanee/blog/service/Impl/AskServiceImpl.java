@@ -13,7 +13,6 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,15 +26,16 @@ import org.springframework.stereotype.Service;
 @Service
 public class AskServiceImpl extends ServiceImpl<AskMapper, Ask> implements AskService {
     
-    @Autowired
-    private AskMapper AskMapper;
+    /**
+     * 在父类ServiceImpl中已经注册进来了AskMapper 名称为baseMapper
+     */
     
     @Override
     public PageResult<Ask> findAskByPage(AskQuery askQuery) {
         Page<Ask> page = new Page<>(askQuery.getPageOn(), askQuery.getPageSize());
         EntityWrapper<Ask> wrapper = new EntityWrapper<>();
         wrapper.orderBy(OrderByEnum.CREATE_TIME_DESC.getOrderBy());
-        List<Ask> topicList = AskMapper.selectPage(page, wrapper);
+        List<Ask> topicList = baseMapper.selectPage(page, wrapper);
         PageResult<Ask> pageResult = new PageResult<>(page,topicList);
         return pageResult;
     }
