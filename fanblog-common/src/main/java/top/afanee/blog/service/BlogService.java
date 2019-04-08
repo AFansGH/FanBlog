@@ -24,5 +24,7 @@ public interface BlogService extends IService<Blog> {
 
     void addBlog(Blog blog, Attachment attachment)throws BussinessException;
 
+    Blog showBlog(Integer blogId)throws BussinessException ;
+
 
 }

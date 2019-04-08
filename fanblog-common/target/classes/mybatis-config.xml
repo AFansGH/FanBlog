@@ -13,6 +13,10 @@
 	<typeHandlers>
 		<typeHandler handler="top.afanee.blog.po.handler.BlogStatusHandler" 
         javaType="top.afanee.blog.po.enums.BlogStatusEnum" jdbcType="INTEGER"/>
+        
+        <typeHandler handler="top.afanee.blog.po.handler.FileTopicTypeHandler" 
+        javaType="top.afanee.blog.po.enums.FileTopicType" jdbcType="VARCHAR"/>
+        
 	</typeHandlers>
 	
 </configuration>

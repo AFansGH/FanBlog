@@ -11,19 +11,20 @@
 		<link rel="stylesheet" type="text/css" href="${realpath}/resources/css/userfullhome.css">
 	</#if>
 	<script type="text/javascript" charset="utf-8" src="${realpath}/resources/laypage/laypage.js"></script>
+	
 	<style type="text/css">
 		.page {
 		    text-align: center;
-		    padding-top: 20px;
+		    padding-top: 200px;
 		    background-color: #fff;
 		    padding-right: 20px;
 		}
 	</style>
 	<script type="text/javascript">
-		fzqblog.center = {
-			userId: "${user.userid?c}",
+		fanblog.center = {
+			userId: "${user.userId?c}",
 		};
-		fzqblog.pageTotal = ${result.page.pageTotal!'1'}
+		fanblog.pageTotal = ${result.page.total!'1'}
 	</script>
 	<title>${user.userName}的博客</title>
 </head>
@@ -34,6 +35,14 @@
 		<div class="user-home-icon"><img class="img-circle" src="${realpath}/resources/images/${user.userIcon}"></div>
 		<div class="user-characters">${user.characters!'这个人很懒，什么也没留下。'}</div>
 		</div>
+		
+		
+		<style type="text/css">
+			body {
+			background:rgba(255,255,255,1); 
+			
+			}
+		</style>
 
 		<div class="left">
 			<div class="user-home-user-name">${user.userName}</div>
@@ -58,11 +67,11 @@
 						<#assign blogCountTotal=blogCountTotal+item.blogCount>
 					</#list>
 					<li>
-						<a href="${realpath}/user/${user.userid?c}/blog" class="active">全部博客(<span class="blog-count">${blogCountTotal}</span>)</a>
+						<a href="${realpath}/user/${user.userId?c}/blog" class="active">全部博客(<span class="blog-count">${blogCountTotal}</span>)</a>
 					</li>
 					<#list categoryList as item>
 						<li>
-							<a href="${realpath}/user/${user.userid?c}/blog?categoryId=${item.categoryId?c}">${item.name}(<span class="blog-count">${item.blogCount}</span>)</a>
+							<a href="${realpath}/user/${user.userId?c}/blog?categoryId=${item.categoryId?c}">${item.name}(<span class="blog-count">${item.blogCount}</span>)</a>
 						</li>
 					</#list>
 					<div class="clear"></div>
@@ -73,16 +82,16 @@
 <script>
 $(function(){
     $("#focus-btn").click(function(){
-		if(fzqblog.userId==""){
-		    fzqblog.goLogin();
+		if(fanblog.userId==""){
+		    fanblog.goLogin();
 		    return;
 		}
 		var focusType = $(this).attr("focusType");
 		var url="";
 		if(focusType=="1"){//关注
-		    url=fzqblog.realpath+"/user/focus.action";
+		    url=fanblog.realpath+"/user/focus.action";
 		}else if(focusType=="2"){
-		    url=fzqblog.realpath+"/user/cancel_focus.action";
+		    url=fanblog.realpath+"/user/cancel_focus.action";
 		}
 		var that = $(this);
 
@@ -90,7 +99,7 @@ $(function(){
 			url: url,
 			type: 'POST',
 			dataType: 'json',
-			data: {friendUserId:"${user.userid?c}"},
+			data: {friendUserId:"${user.userId?c}"},
 			success:function(res){
 			   if(focusType=="1"){
 			       that.attr("focusType",2);
@@ -118,16 +127,16 @@ $(function(){
 		<div class="right">
 			<div class="user-home-tag">
 				<ul class="tag" id="tag">
-					<li type="shuoshuo" ><a href="${realpath}/user/${user.userid?c}">吐槽</a></li>
-					<li type="topic" ><a href="${realpath}/user/${user.userid?c}#topic">讨论</a></li>
-					<li type="ask" ><a href="${realpath}/user/${user.userid?c}#ask">问答</a></li>
-					<li type="knowledge" ><a href="${realpath}/user/${user.userid?c}#knowledge">知识库</a></li>
-					<li type="blog" class="active" style="border-bottom: 1px solid #fff;"><a href="${realpath}/user/${user.userid?c}/blog">博客</a></li>
-					<li type="fans" ><a href="${realpath}/user/${user.userid?c}#fans">Ta的粉丝</a></li>
-					<li type="focus" ><a href="${realpath}/user/${user.userid?c}#focus">Ta关注的人</a></li>
+					<li type="shuoshuo" ><a href="${realpath}/user/${user.userId?c}">吐槽</a></li>
+					<li type="topic" ><a href="${realpath}/user/${user.userId?c}#topic">讨论</a></li>
+					<li type="ask" ><a href="${realpath}/user/${user.userId?c}#ask">问答</a></li>
+					<li type="knowledge" ><a href="${realpath}/user/${user.userId?c}#knowledge">知识库</a></li>
+					<li type="blog" class="active" style="border-bottom: 1px solid #fff;"><a href="${realpath}/user/${user.userId?c}/blog">博客</a></li>
+					<li type="fans" ><a href="${realpath}/user/${user.userId?c}#fans">Ta的粉丝</a></li>
+					<li type="focus" ><a href="${realpath}/user/${user.userId?c}#focus">Ta关注的人</a></li>
 				</ul>
 				<div class="topic-item-list">
-				<#if (result.page.pageTotal>0)>
+				<#if (result.page.total>0)>
 				<#list result.list as item>
 					<div class="topic-item">
 						<div class="topic-item-info">
@@ -179,7 +188,7 @@ $(function(){
 			$(document).ready(function() {
 			    laypage({
 					    cont: 'page',
-					    pages: fzqblog.pageTotal, //可以叫服务端把总页数放在某一个隐藏域，再获取。假设我们获取到的是18
+					    pages: fanblog.pageTotal, //可以叫服务端把总页数放在某一个隐藏域，再获取。假设我们获取到的是18
 					    skin: 'molv', //皮肤
 					    curr: function(){ //通过url获取当前页，也可以同上（pages）方式获取
 					        var page = location.search.match(/pageNum=(\d+)/);

@@ -26,5 +26,26 @@
     <sql id="Base_Column_List">
         blog_id, category_id, title, content, summary, user_id, user_icon, user_name, create_time, comment_count, read_count, collection_count, like_count, blog_image, blog_image_thum, status
     </sql>
+    
+    
+    <update id="updateInfoCount" >
+	    update fanblog_blog
+	    <set>
+	    		<if test="addReadCount">
+	    				read_count = read_count + 1
+	    		</if>
+	    		<if test="addLikeCount">
+	    				like_count = like_count + 1
+	    		</if>
+	    		<if test="addCommentCount">
+	    				comment_count = comment_count + 1
+	    		</if>
+	    		<if test="addCollectionCount">
+	    				collection_count = collection_count + 1
+	    		</if>
+	    </set>
+	    where blog_id = #{articleId}
+	</update>
+    
 
 </mapper>

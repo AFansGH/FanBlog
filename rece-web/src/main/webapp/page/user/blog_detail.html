@@ -19,6 +19,19 @@
 </head>
 <body>
 	<#include "../include/header.html">
+	
+	<style type="text/css">
+	body {	
+			margin: 0;
+			background: url(${realpath}/resources/images/bg.png) no-repeat 0px 0px;
+			background-size:cover;
+			-webkit-background-size:cover;
+			-moz-background-size:cover;
+			-o-background-size:cover;
+			background-color: rgba(255,255,255,0.5);
+			
+			}
+	</style>
 		<div class="main">
 			<div class="arc-shadow">
 				<div class="topic-info-con">
@@ -44,7 +57,7 @@
 					</div>
 					<div class="clear"></div>
 				</div>
-				<div class="topic-detail">
+				<div class="topic-detail" style="width: 1100px">
 					${topic.content}
 				</div>
 				<#if topic.attachment??>

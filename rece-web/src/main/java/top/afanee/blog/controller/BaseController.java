@@ -17,6 +17,14 @@ import top.afanee.blog.utils.Constants;
  */
 public class BaseController {
 	
+    
+    /**
+     * 
+     * @Description TODO(利用反射，为前端传递的说说、博客、问答等对象封装用户信息)
+     * @param clazz 对象类型
+     * @param obj   对象实例
+     * @param session
+     */
 	public void setUserBaseInfo(Class<?> clazz, Object obj, HttpSession session){
 		SessionUser sessionUser = (SessionUser) session.getAttribute(Constants.SESSION_USER_KEY);
 		Integer userId = sessionUser.getUserId();
