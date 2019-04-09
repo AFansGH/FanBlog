@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.afanee.blog.mapper.BlogCategoryMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="top.afanee.blog.entity.BlogCategory">
+		<id column="category_id" property="categoryId" />
+		<result column="user_id" property="userId" />
+		<result column="name" property="name" />
+		<result column="rank" property="rank" />
+		<result column="blogCount" property="blogCount" />
+	</resultMap>
+
+	<!-- 通用查询结果列 -->
+	<sql id="Base_Column_List">
+		category_id, user_id, name, rank
+	</sql>
+
+
+	<sql id="Base_Condition">
+		<where>
+			<if test="null!= categoryId">
+				and category_id = #{categoryId}
+			</if>
+			<if test="userId != null">
+				and user_id = #{userId,jdbcType=INTEGER}
+			</if>
+		</where>
+	</sql>
+
+	<select id="selectList2BlogCategoryQuery" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		,
+		(
+		select count(1) from fanblog_blog b where b.category_id = c.category_id
+		<if test="status != null">
+			and b.status = #{status.type,jdbcType=INTEGER}
+		</if>
+		<if test="userId != null">
+			and b.user_id = #{userId,jdbcType=INTEGER}
+		</if>
+		) blogCount
+		from fanblog_blog_category c
+		<include refid="Base_Condition" />
+		order by rank
+	</select>
+
+</mapper>

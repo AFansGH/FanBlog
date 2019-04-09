@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.afanee.blog.mapper.AttachmentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="top.afanee.blog.entity.Attachment">
+        <id column="attachment_id" property="attachmentId" />
+        <result column="topic_id" property="topicId" />
+        <result column="file_name" property="fileName" />
+        <result column="file_url" property="fileUrl" />
+        <result column="download_mark" property="downloadMark" />
+        <result column="download_count" property="downloadCount" />
+        <result column="topic_type" property="topicType" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        attachment_id, topic_id, file_name, file_url, download_mark, download_count, topic_type
+    </sql>
+    
+</mapper>

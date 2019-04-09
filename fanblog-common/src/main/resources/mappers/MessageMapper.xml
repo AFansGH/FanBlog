@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="top.afanee.blog.mapper.MessageMapper">
+
+	<!-- 通用查询映射结果 -->
+	<resultMap id="BaseResultMap" type="top.afanee.blog.entity.Message">
+		<id column="id" property="id" />
+		<result column="received_user_id" property="receivedUserId" />
+		<result column="create_time" property="createTime" />
+		<result column="status" property="status" />
+		<result column="description" property="description" />
+		<result column="url" property="url" />
+	</resultMap>
+
+	<!-- 通用查询结果列 -->
+	<sql id="Base_Column_List">
+		id, received_user_id, create_time, status, description, url
+	</sql>
+
+	<update id="updateSatatus">
+		update fzqblog_message
+		<set>
+			status = 1
+		</set>
+		where received_user_id = #{userId}
+		and id in (
+		<foreach collection="ids" separator="," item="item"> #{item}
+		</foreach>
+		)
+	</update>
+
+	<delete id="deleteByUserIdAndId">
+		delete from fzqblog_message
+		where received_user_id = #{userId}
+		and id in (
+		<foreach collection="ids" separator="," item="id"> #{id}</foreach>
+		)
+	</delete>
+
+</mapper>
